@@ -10,6 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from '../../core/services/api.service';
 import type { ComparisonStats } from '../../core/api/types';
 import { AuthService } from '../../core/services/auth.service';
@@ -160,6 +161,11 @@ const SORT_VALUES = ['easiest', 'redundant', 'best', 'recent', 'needs_comparison
 /** Thumbnail width the darkroom displays. Shared with the peaking pipeline so
  *  the edge map is computed from the very pixels on screen. */
 const DARKROOM_THUMB_SIZE = 1920;
+/** Every rejected photo in the library, whatever the gallery's hide toggles say. */
+const ALL_REJECTS_SCOPE = {
+  show_rejected: '1', hide_blinks: 'false', hide_bursts: 'false',
+  hide_duplicates: 'false', hide_brackets: 'false', hide_panoramas: 'false',
+};
 
 /** Stable empty overlay map, so clearing an already-empty one is a no-op
  *  instead of a change-detection round for every darkroom navigation. */
@@ -502,6 +508,13 @@ class RunGeneration {
                     [matTooltip]="I18N.culling.auto_cull.tooltip | translate"
                     [attr.aria-label]="I18N.culling.auto_cull.button | translate">
               <mat-icon>auto_fix_high</mat-icon>
+            </button>
+          }
+          @if (auth.isEdition() && store.config()?.cull?.trash_available) {
+            <button mat-icon-button class="shrink-0" (click)="openTrashRejects()"
+                    [matTooltip]="I18N.cull.trash_rejects | translate"
+                    [attr.aria-label]="I18N.cull.trash_rejects | translate">
+              <mat-icon>delete_sweep</mat-icon>
             </button>
           }
           @if (unconfirmedCount() > 0) {
@@ -1430,6 +1443,7 @@ export class BurstCullingComponent implements OnDestroy {
   private readonly undoService = inject(UndoService);
   protected readonly auth = inject(AuthService);
   protected readonly store = inject(GalleryStore);
+  private readonly dialog = inject(MatDialog);
   private readonly sceneDate = new SceneDatePipe();
 
   /** Granularity served by the feed: all (merged burst+similar) | burst | similar | scene.
@@ -3098,6 +3112,16 @@ export class BurstCullingComponent implements OnDestroy {
   private reconcileTrimBrackets(): void {
     const applied = this.autoCullRequest();
     if (applied) this.trimBrackets.set(applied.trim_brackets);
+  }
+
+  /** Files only: the rows stay, so the culling pairs that train My Taste survive
+   *  (deleting a row cascades its comparisons away). */
+  protected async openTrashRejects(): Promise<void> {
+    const { CullDialogComponent } = await import('./cull-dialog.component');
+    this.dialog.open(CullDialogComponent, {
+      width: '32rem',
+      data: { paths: [], filters: ALL_REJECTS_SCOPE, trashAvailable: true, action: 'trash_rejects' },
+    });
   }
 
   /**
