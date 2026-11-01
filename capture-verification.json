@@ -1,6 +1,6 @@
 {
   "captured": "2026-11-01",
-  "profile": "fresh incognito",
+  "profile": "owned incognito; actual Reload after frozen bundle update",
   "allSixImagesInspected": true,
   "reloadNotice": false,
   "master": {
@@ -9,21 +9,22 @@
     "sha256": "433102a82bbbf13ff1540d7ea3db9bc1f0ee3882e8d27df2ef0ca40687065eb7"
   },
   "redesign": {
-    "head": "a2101304bfd994089a4146f643f17e5692bde428",
-    "script": "main-LZWHAQYG.js",
-    "sha256": "ea5b24fb3ef080db749661f7aa9c03eb9124dac03c238b6f164f9987de358233",
+    "head": "3f113c33f00d017c3a639dabb96e28a1b99b2b44",
+    "script": "main-J3ZGPXDC.js",
+    "sha256": "e1878d63d9f40d3d3a26e32e50a11de280b8bfe6e592bc0a0cffb2bcfdf9c270",
     "description": "Current dedicated comparison workspace and two-row mobile controls"
   },
-  "versionEvidence": "Browser script URLs and SHA256 of fetched content match frozen bundle bytes. Fresh profile avoids previous pending SW update. Both captures read-only. No DOM hiding or image editing.",
-  "qualityVerdict": "Ready for user UI feedback; no claim of accepted design or release readiness.",
+  "versionEvidence": "Browser script URL matches frozen main-J3ZGPXDC.js; bundle SHA256 verified. Actual Reload action used before final captures; no notice, hiding or image editing. Current three PNGs root-viewed; master three preserved from exact9d captures.",
+  "qualityVerdict": "Implementation plan complete with documented capability limits; design approval and merge remain maintainer decisions.",
   "captureNotes": "All three current redesign PNGs visually inspected. No reload notice. Same private CC0 photo fixture; dark theme; desktop/comparison1280x800, phone390x844. Master images remain exact9d729f79.",
   "validation": {
-    "clientTests": 5449,
+    "clientTests": 5456,
     "files": 214,
     "appTs": "PASS",
     "specTs": "PASS",
     "lint": "PASS",
     "productionBuild": "PASS",
-    "hostedChecks": "not confirmed"
+    "hostedChecks": "not confirmed",
+    "backendTests": 135
   }
 }
