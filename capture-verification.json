@@ -10,8 +10,8 @@
   },
   "redesign": {
     "head": "a2101304bfd994089a4146f643f17e5692bde428",
-    "script": "main-URI7FDKP.js",
-    "sha256": "8369a4fe11d37e677148416804e28b5d133a0b258710ddf149d4ec4a11ac5703",
+    "script": "main-LZWHAQYG.js",
+    "sha256": "ea5b24fb3ef080db749661f7aa9c03eb9124dac03c238b6f164f9987de358233",
     "description": "Current dedicated comparison workspace and two-row mobile controls"
   },
   "versionEvidence": "Browser script URLs and SHA256 of fetched content match frozen bundle bytes. Fresh profile avoids previous pending SW update. Both captures read-only. No DOM hiding or image editing.",
