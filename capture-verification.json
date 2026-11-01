@@ -9,10 +9,21 @@
     "sha256": "433102a82bbbf13ff1540d7ea3db9bc1f0ee3882e8d27df2ef0ca40687065eb7"
   },
   "redesign": {
-    "head": "8195e7e6f23c23679c0e40adf08b49e5767c34cd",
+    "head": "a2101304bfd994089a4146f643f17e5692bde428",
     "script": "main-URI7FDKP.js",
-    "sha256": "8369a4fe11d37e677148416804e28b5d133a0b258710ddf149d4ec4a11ac5703"
+    "sha256": "8369a4fe11d37e677148416804e28b5d133a0b258710ddf149d4ec4a11ac5703",
+    "description": "Current dedicated comparison workspace and two-row mobile controls"
   },
   "versionEvidence": "Browser script URLs and SHA256 of fetched content match frozen bundle bytes. Fresh profile avoids previous pending SW update. Both captures read-only. No DOM hiding or image editing.",
-  "qualityVerdict": "Unfinished. Phone collection header217CSSpx conflicts with space priority. Comparison control area too large, popup rejected. Desktop clearer labels and uniform frames, but weak photo density."
+  "qualityVerdict": "Ready for user UI feedback; no claim of accepted design or release readiness.",
+  "captureNotes": "All three current redesign PNGs visually inspected. No reload notice. Same private CC0 photo fixture; dark theme; desktop/comparison1280x800, phone390x844. Master images remain exact9d729f79.",
+  "validation": {
+    "clientTests": 5449,
+    "files": 214,
+    "appTs": "PASS",
+    "specTs": "PASS",
+    "lint": "PASS",
+    "productionBuild": "PASS",
+    "hostedChecks": "not confirmed"
+  }
 }
