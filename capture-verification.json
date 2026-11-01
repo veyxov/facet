@@ -1,0 +1,18 @@
+{
+  "captured": "2026-11-01",
+  "profile": "fresh incognito",
+  "allSixImagesInspected": true,
+  "reloadNotice": false,
+  "master": {
+    "head": "9d729f79cc7639e84317ba78d4cc3a609a1829f7",
+    "script": "main-V2Q2SMRD.js",
+    "sha256": "433102a82bbbf13ff1540d7ea3db9bc1f0ee3882e8d27df2ef0ca40687065eb7"
+  },
+  "redesign": {
+    "head": "8195e7e6f23c23679c0e40adf08b49e5767c34cd",
+    "script": "main-URI7FDKP.js",
+    "sha256": "8369a4fe11d37e677148416804e28b5d133a0b258710ddf149d4ec4a11ac5703"
+  },
+  "versionEvidence": "Browser script URLs and SHA256 of fetched content match frozen bundle bytes. Fresh profile avoids previous pending SW update. Both captures read-only. No DOM hiding or image editing.",
+  "qualityVerdict": "Unfinished. Phone collection header217CSSpx conflicts with space priority. Comparison control area too large, popup rejected. Desktop clearer labels and uniform frames, but weak photo density."
+}
