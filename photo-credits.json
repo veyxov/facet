@@ -1,0 +1,20 @@
+[
+  {
+    "file": "coffee.png",
+    "creator": "Rachel Michetti",
+    "license": "CC0",
+    "source": "https://raw.githubusercontent.com/scikit-image/scikit-image/v0.25.2/skimage/data/coffee.png",
+    "sha256": "cc02f8ca188b167c775a7101b5d767d1e71792cf762c33d6fa15a4599b5a8de7",
+    "license_evidence": "https://scikit-image.org/docs/stable/api/skimage.data",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  {
+    "file": "chelsea.png",
+    "creator": "Stefan van der Walt",
+    "license": "CC0",
+    "source": "https://raw.githubusercontent.com/scikit-image/scikit-image/v0.25.2/skimage/data/chelsea.png",
+    "sha256": "596aa1e7cb875eb79f437e310381d26b338a81c2da23439704a73c4651e8c4bb",
+    "license_evidence": "https://scikit-image.org/docs/stable/api/skimage.data",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
+]
