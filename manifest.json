@@ -1,0 +1,46 @@
+{
+  "before": "c4f3f88a77017865d52bd13767f877e9fda39e53",
+  "after": "23a84a2da0b729514263ebd2d3711f57edf395a0",
+  "screenshots": {
+    "gallery-before": {
+      "file": "gallery-before.png",
+      "sha256": "b66462a6b540ed177b88c7401e1d2b53c7d5940bd87c4df3621eb955fc0ace82"
+    },
+    "gallery-after": {
+      "file": "gallery-after.png",
+      "sha256": "924ea7aaff85fb7fd6dca5789bf1ff4730257a5c62f9e28c66279cf77ec59600"
+    },
+    "phone-before": {
+      "file": "phone-before.png",
+      "sha256": "7d23039d1142703f37c445893c67cf76637967f11ed8fb3cb86dbb601c11a870"
+    },
+    "phone-after": {
+      "file": "phone-after.png",
+      "sha256": "972c50e37abbc070a7a83d6f7f0f01f68f0f7f6e401cbc5c1c7d1c7fa85c27af"
+    },
+    "photo-before": {
+      "file": "photo-before.png",
+      "sha256": "31b522bbe59b16cdca2899dd66236fee6f21e4a471df2da49f1542329df0ed40"
+    },
+    "photo-after": {
+      "file": "photo-after.png",
+      "sha256": "d8c27d2021af7c86c2277678186467b92349a44a1c0bcdbf7f215a35ed695d43"
+    },
+    "selection-after": {
+      "file": "selection-after.png",
+      "sha256": "56c4b07af12dea0005527ce2a4270ffe382f599a55a3c67600d5c988c301db5b"
+    },
+    "comparison-after": {
+      "file": "comparison-after.png",
+      "sha256": "debbc2e3fb99b97e00b121a69831ae1e3cf48506ba7f3eb2fc4a330acd41918d"
+    },
+    "cull-after": {
+      "file": "cull-after.png",
+      "sha256": "8256eec173e67c3b5f2697988eef9227d103de555b9c37e8292988677b3c6f33"
+    },
+    "batch-after": {
+      "file": "batch-after.png",
+      "sha256": "81716793c1717d359ed8a80a957752082f9185696ed08e9b53b33a32de7ef06a"
+    }
+  }
+}
