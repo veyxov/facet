@@ -1,0 +1,113 @@
+{
+  "before": "73c3212ee8609634603b048c7dfe6265bba321ff",
+  "after": "26473a658738943eb3bcfa66496b9c1eed338a7f",
+  "desktop_css_viewport": [
+    1440,
+    900
+  ],
+  "phone_css_viewport": [
+    390,
+    844
+  ],
+  "thumbnail_setting_px": 240,
+  "images": {
+    "comparison-workspace.png": {
+      "dimensions": [
+        1500,
+        1167
+      ],
+      "sha256": "0e5cea41112b39424ace8bf6cb1b061ac6ae046efac91ac0f76cc427f5a7d944"
+    },
+    "gallery-comparison.png": {
+      "dimensions": [
+        1600,
+        757
+      ],
+      "sha256": "794bbf81ae39d89ecb25fd378c1811a9ab0e2606219ddbf26a0a2b4956fe583f"
+    },
+    "phone-comparison.png": {
+      "dimensions": [
+        1000,
+        1088
+      ],
+      "sha256": "153f871deaa0ec6898495c100888ed56563ea2ac75e3d74ec883c762d0b865bd"
+    },
+    "photo-comparison.png": {
+      "dimensions": [
+        1600,
+        757
+      ],
+      "sha256": "6594b496be8d9c1352dcc5389eac3451c8352fb068f9398197466196f1f0504c"
+    },
+    "preview-workflows.png": {
+      "dimensions": [
+        1600,
+        1062
+      ],
+      "sha256": "6951311719f5d4fcf2fc6a57454b96aad23277daae0cd04034adddfbc44304ee"
+    },
+    "raw/batch-after.png": {
+      "dimensions": [
+        1280,
+        800
+      ],
+      "sha256": "71781be61e947dec4eac65805f0711765699c88f2854bb90eef0d71a8a8126bf"
+    },
+    "raw/comparison-after.png": {
+      "dimensions": [
+        1280,
+        800
+      ],
+      "sha256": "1b7b5acecab782ee7fc7754a2b15ef4502028ad4b5af6afdf5ef791174232312"
+    },
+    "raw/cull-after.png": {
+      "dimensions": [
+        1280,
+        800
+      ],
+      "sha256": "51e6b1ade43ac83ddfc1d6aedcb51692fca5710a0c26a71ed43f438f5d7605f5"
+    },
+    "raw/gallery-after.png": {
+      "dimensions": [
+        1280,
+        800
+      ],
+      "sha256": "6638c813fb55337c36cce8a4208cec05dd7c83bab6fc54cd8176821ef6dba3ea"
+    },
+    "raw/gallery-before.png": {
+      "dimensions": [
+        1280,
+        800
+      ],
+      "sha256": "074a04f05c96114a0ca56afedea6d8d36af996fb05cb692408e72664ce75623a"
+    },
+    "raw/phone-after.png": {
+      "dimensions": [
+        780,
+        1688
+      ],
+      "sha256": "a65928649bd2dec044de39cc7342918cc12a20b9a1bc250d5c1a58f9adea7ba7"
+    },
+    "raw/phone-before.png": {
+      "dimensions": [
+        780,
+        1688
+      ],
+      "sha256": "89909d468d90a728166042e67d72521feca5f733c033c55c0436fc72d98bc256"
+    },
+    "raw/photo-after.png": {
+      "dimensions": [
+        1280,
+        800
+      ],
+      "sha256": "6297c5aea5dbc5adff5392e1489772a63a4c54466c3250f2f674b627cb388189"
+    },
+    "raw/photo-before.png": {
+      "dimensions": [
+        1280,
+        800
+      ],
+      "sha256": "2b733462de844c498e2295e2451f2a769d39ef542e4f4601d6c2cfb03cf89caf"
+    }
+  }
+}
