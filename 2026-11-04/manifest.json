@@ -1,6 +1,6 @@
 {
   "before": "73c3212ee8609634603b048c7dfe6265bba321ff",
-  "after": "8157b1d1f58c871cf2b3db046a0c597d3957b80b",
+  "after": "bdd9067dc93fa8c229374c48f191e30e71c3f161",
   "desktop_css_viewport": [
     1440,
     900
@@ -16,77 +16,77 @@
         1500,
         1182
       ],
-      "sha256": "9a3fa31fab7f944e8056c4e4d6018720f14a5bf7a596ee9aa5749d5233279b9f"
+      "sha256": "a2e9e51e09ccfe8fb375039a4cbc9f41b1c2fc4e8b1f6168803e9246ba998c60"
     },
     "gallery-comparison.png": {
       "dimensions": [
         1600,
         774
       ],
-      "sha256": "8616800e581f448dda21ad1f9783db07c30d81becbb49730033b82fe9657a94f"
+      "sha256": "1726df4997a9a2a6aacca0fbc8017c7d29379c5dae373f2f5f9b0afce720d278"
     },
     "phone-comparison.png": {
       "dimensions": [
         1000,
         1153
       ],
-      "sha256": "e80ded186ac85437b7960236509b2e87a231e60dc109c5e9fecdd331595d4457"
+      "sha256": "8e0e76d755622077b9e9e5501efd0883c5b52b4b302510d4ff7bf66158f60628"
     },
     "photo-comparison.png": {
       "dimensions": [
         1600,
         774
       ],
-      "sha256": "64cfedce8f03b41b7ae1dc9f6bf3740c6062ec6a765b09cefc5abad4ffd8dc1e"
+      "sha256": "31fca153ba7c055d89cf6ff3b0110afa23a211326e3557fb25bafda97819186b"
     },
     "preview-workflows.png": {
       "dimensions": [
         1600,
         1011
       ],
-      "sha256": "e4db32973c061ef099a844078aad24a80cdfbc697c7b98bb6ad998e7704d6029"
+      "sha256": "ac8ae34fd5968aae9441bf03020aef520a13dc149537d2e7601f7105d0d7f6c1"
     },
     "raw/batch-after.png": {
       "dimensions": [
         1440,
         900
       ],
-      "sha256": "9609103bd72f8803912670bb12604e82d61e28080e8b2a1fb2f4f74b2c2a0d4d"
+      "sha256": "31478f29245ddf5df2be3d0cbefaa93fad584cc96bb4d1fdb9b13fea5e949b1e"
     },
     "raw/batch-dialog.png": {
       "dimensions": [
         540,
-        406
+        486
       ],
-      "sha256": "597f999231a11be42b8806c1097c8acb6034326b55382fd62a6916cfa858d18b"
+      "sha256": "482c55e571d5d13c0c727e9ec401d75932c2240cbe50d987de7be809c6a4952a"
     },
     "raw/comparison-after.png": {
       "dimensions": [
         1440,
         900
       ],
-      "sha256": "b0f08774f1b36f648e343f6630b2bf31f1a5c0b2e7eab3ecc9c521e17eb554e6"
+      "sha256": "2b063e72699a0cc170c508680b1a31e3c995490cebdcec25fab45efc6ec47401"
     },
     "raw/cull-after.png": {
       "dimensions": [
         1440,
         900
       ],
-      "sha256": "a3b58469a1302f91576d87e74f65983c91ac24c66ce579e6c0f3364f52cfd2d3"
+      "sha256": "d51d60124e8c5ad3beb2d884306b07f2d0c5c66ee909296eba19fae92b0821a5"
     },
     "raw/cull-dialog.png": {
       "dimensions": [
         768,
         726
       ],
-      "sha256": "6335bd5f4d5cb11e4d214697111d0778f1ac83be3436b0bdfe516149c38faa24"
+      "sha256": "9b43d3bccf650da6ad54638840ee8fa903d2cedab8d6236d88a3cb8b559aa956"
     },
     "raw/gallery-after.png": {
       "dimensions": [
         1440,
         900
       ],
-      "sha256": "dde88d436bb05eb1e9d24ce5b222c89411dc77b0189ed6e017e2fc29b5be528c"
+      "sha256": "9ebbad398c678c0e8bf36bb302e263d4edfcd672f57c6a509a99799fe513abee"
     },
     "raw/gallery-before.png": {
       "dimensions": [
@@ -100,7 +100,7 @@
         390,
         844
       ],
-      "sha256": "b5bec444c1b852c46d7dfe3d373a39788942969354aa7b6d50d95e793308ad0d"
+      "sha256": "9380b993ab7fda5eadf6da79d09d0c8a7c7cc50eae4229866b0c3d28d42ebce8"
     },
     "raw/phone-before.png": {
       "dimensions": [
