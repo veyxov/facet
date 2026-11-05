@@ -1,0 +1,339 @@
+{
+  "head": "c9b3187a90a0e011d6c9a4e7cce57140cadd69ce",
+  "account": "fixture edition access, matching baseline comparison permissions",
+  "browser": "Chromium fallback after two shared-preview snapshot timeouts; isolated context serviceWorkers blocked",
+  "pngScale": "1 CSS pixel per image pixel; baseline uses DPR2/scaled PNGs at matching CSS viewport sizes",
+  "captures": [
+    {
+      "name": "after-v2-desktop-4",
+      "viewport": [
+        1465,
+        900
+      ],
+      "imageCount": 8,
+      "decoded": true,
+      "overflow": false,
+      "toasts": 0,
+      "panes": [
+        {
+          "width": 725,
+          "height": 237
+        },
+        {
+          "width": 725,
+          "height": 237
+        },
+        {
+          "width": 725,
+          "height": 237
+        },
+        {
+          "width": 725,
+          "height": 237
+        }
+      ]
+    },
+    {
+      "name": "after-v2-phone-4",
+      "viewport": [
+        390,
+        844
+      ],
+      "imageCount": 8,
+      "decoded": true,
+      "overflow": false,
+      "toasts": 0,
+      "panes": [
+        {
+          "width": 187,
+          "height": 173
+        },
+        {
+          "width": 187,
+          "height": 173
+        },
+        {
+          "width": 187,
+          "height": 173
+        },
+        {
+          "width": 187,
+          "height": 173
+        }
+      ]
+    },
+    {
+      "name": "after-v2-dark-1024-2of4",
+      "viewport": [
+        1024,
+        900
+      ],
+      "imageCount": 6,
+      "decoded": true,
+      "overflow": false,
+      "toasts": 0,
+      "panes": [
+        {
+          "width": 504,
+          "height": 557
+        },
+        {
+          "width": 504,
+          "height": 557
+        }
+      ]
+    },
+    {
+      "name": "after-v2-pan-bounded",
+      "viewport": [
+        1465,
+        900
+      ],
+      "imageCount": 8,
+      "decoded": true,
+      "overflow": false,
+      "toasts": 0,
+      "panes": [
+        {
+          "width": 725,
+          "height": 557
+        },
+        {
+          "width": 725,
+          "height": 557
+        }
+      ]
+    },
+    {
+      "name": "after-v2-desktop-2",
+      "viewport": [
+        1465,
+        900
+      ],
+      "imageCount": 4,
+      "decoded": true,
+      "overflow": false,
+      "toasts": 0,
+      "panes": [
+        {
+          "width": 725,
+          "height": 557
+        },
+        {
+          "width": 725,
+          "height": 557
+        }
+      ]
+    },
+    {
+      "name": "after-v2-phone-2",
+      "viewport": [
+        390,
+        844
+      ],
+      "imageCount": 4,
+      "decoded": true,
+      "overflow": false,
+      "toasts": 0,
+      "panes": [
+        {
+          "width": 380,
+          "height": 201
+        },
+        {
+          "width": 380,
+          "height": 201
+        }
+      ]
+    },
+    {
+      "name": "after-v2-phone-inspect-2",
+      "viewport": [
+        390,
+        844
+      ],
+      "imageCount": 4,
+      "decoded": true,
+      "overflow": false,
+      "toasts": 0,
+      "panes": [
+        {
+          "width": 380,
+          "height": 201
+        },
+        {
+          "width": 380,
+          "height": 201
+        }
+      ]
+    },
+    {
+      "name": "after-v2-long-320",
+      "viewport": [
+        320,
+        740
+      ],
+      "imageCount": 4,
+      "decoded": true,
+      "overflow": false,
+      "toasts": 0,
+      "panes": [
+        {
+          "width": 310,
+          "height": 133
+        },
+        {
+          "width": 310,
+          "height": 121
+        }
+      ]
+    },
+    {
+      "name": "after-v2-de-320",
+      "viewport": [
+        320,
+        740
+      ],
+      "imageCount": 4,
+      "decoded": true,
+      "overflow": false,
+      "toasts": 0,
+      "panes": [
+        {
+          "width": 310,
+          "height": 133
+        },
+        {
+          "width": 310,
+          "height": 121
+        }
+      ]
+    },
+    {
+      "name": "after-v2-de-320-four",
+      "viewport": [
+        320,
+        740
+      ],
+      "imageCount": 8,
+      "decoded": true,
+      "overflow": false,
+      "toasts": 0,
+      "panes": [
+        {
+          "width": 152,
+          "height": 121
+        },
+        {
+          "width": 152,
+          "height": 121
+        },
+        {
+          "width": 152,
+          "height": 121
+        },
+        {
+          "width": 152,
+          "height": 121
+        }
+      ]
+    },
+    {
+      "name": "de-320-four-controls",
+      "geometry": [
+        [
+          {
+            "width": 44,
+            "height": 44,
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "width": 44,
+            "height": 44,
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "width": 44,
+            "height": 44,
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          }
+        ],
+        [
+          {
+            "width": 44,
+            "height": 44,
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "width": 44,
+            "height": 44,
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "width": 44,
+            "height": 44,
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          }
+        ],
+        [
+          {
+            "width": 44,
+            "height": 44,
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "width": 44,
+            "height": 44,
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "width": 44,
+            "height": 44,
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          }
+        ],
+        [
+          {
+            "width": 44,
+            "height": 44,
+            "disabled": true,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "width": 44,
+            "height": 44,
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          },
+          {
+            "width": 44,
+            "height": 44,
+            "disabled": false,
+            "inside": true,
+            "hit": true
+          }
+        ]
+      ]
+    }
+  ]
+}
