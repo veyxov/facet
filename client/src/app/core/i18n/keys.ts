@@ -1138,14 +1138,7 @@ export const I18N = {
         any_people: "gallery.criteria.logic.any_people",
       },
     },
-    presentation: {
-      label: "gallery.presentation.label",
-      help: "gallery.presentation.help",
-      browse: "gallery.presentation.browse",
-      review: "gallery.presentation.review",
-      organize: "gallery.presentation.organize",
-      reset: "gallery.presentation.reset",
-    },
+    reset_display: "gallery.reset_display",
     help: "gallery.help",
     hidden_banner: {
       message: "gallery.hidden_banner.message",
@@ -1428,10 +1421,11 @@ export const I18N = {
           rejected_only: "gallery.sidebar.review.desc.rejected_only",
         },
         quick: "gallery.sidebar.review.quick",
-        rating_off: "gallery.sidebar.review.rating_off",
-        rating_step: "gallery.sidebar.review.rating_step",
-        rating_last: "gallery.sidebar.review.rating_last",
         rejected_locked: "gallery.sidebar.review.rejected_locked",
+        rating_any: "gallery.sidebar.review.rating_any",
+        rating_min: "gallery.sidebar.review.rating_min",
+        rating_range: "gallery.sidebar.review.rating_range",
+        rating_help: "gallery.sidebar.review.rating_help",
       },
       metric_help: {
         score_range: "gallery.sidebar.metric_help.score_range",
@@ -1634,6 +1628,7 @@ export const I18N = {
       move_up: "gallery.card_actions.move_up",
       move_down: "gallery.card_actions.move_down",
       reset: "gallery.card_actions.reset",
+      open: "gallery.card_actions.open",
     },
     review_progress: {
       title: "gallery.review_progress.title",
