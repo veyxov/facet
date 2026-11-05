@@ -1,0 +1,25 @@
+{
+  "before": "d6d1b4b89e50d63c9c9e75b88bfdb3dee3467627",
+  "after": "d1bb4b344d6d2ffb9df04bcbd7fd57e7c928a9ac",
+  "ui_source": "e174a338c4237ca142f365ca4ff55ef10e8c8463",
+  "desktop_css_viewport": [
+    1465,
+    900
+  ],
+  "phone_css_viewport": [
+    390,
+    844
+  ],
+  "dataset": "Disposable 116-photo sample library; same photo and query",
+  "images": [
+    "2026-11-05/photo/before-desktop.png",
+    "2026-11-05/photo/before-phone.png",
+    "2026-11-05/photo/after-desktop.png",
+    "2026-11-05/photo/after-phone.png",
+    "2026-11-05/photo/after-member-phone.png",
+    "2026-11-05/photo/after-dark-tablet.png",
+    "2026-11-05/photo/after-german-phone.png",
+    "2026-11-05/photo/after-inspector-desktop.png",
+    "2026-11-05/photo/after-touch-tablet.png"
+  ]
+}
