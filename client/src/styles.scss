@@ -28,6 +28,8 @@
   --facet-image-chrome: oklch(22% 0.006 250);
   --facet-image-ink: oklch(94% 0.004 250);
   --facet-image-rule: oklch(38% 0.006 250);
+  --facet-graph-family: color-mix(in srgb, var(--mat-sys-primary) 70%, var(--facet-image-ink));
+  --facet-graph-social: color-mix(in srgb, var(--mat-sys-tertiary) 70%, var(--facet-image-ink));
   --facet-favorite: #fda4af;
   --facet-review-kept: #064e3b;
   --facet-review-on-kept: #ffffff;

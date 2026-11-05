@@ -642,3 +642,23 @@ def test_a_viewer_change_between_the_read_and_the_write_survives_the_phase(tmp_p
     assert {k: v for k, v in mine.items() if k != target} == \
            {k: v for k, v in oracle.items() if k != target}
     assert any("conflict" in r.getMessage().lower() for r in caplog.records)
+
+
+@pytest.mark.parametrize('mode', [{'force': True}, {'preserve_named_only': True}])
+def test_graph_preserved_person_refreshes_derived_fields_when_faces_become_noise(tmp_path, mode):
+    path = str(tmp_path / 'graph-preservation.db')
+    init_database(path)
+    vector = _axis(87)
+    with _db(path) as conn:
+        person = conn.execute('INSERT INTO persons(name,face_count,centroid,face_thumbnail) VALUES(NULL,1,?,?)', (vector.tobytes(), b'old-avatar')).lastrowid
+        conn.execute("INSERT INTO photos(path) VALUES('/synthetic/graph.jpg')")
+        face = conn.execute("INSERT INTO faces(photo_path,face_index,embedding,person_id,face_thumbnail) VALUES('/synthetic/graph.jpg',0,?,?,?)", (vector.tobytes(), person, b'face')).lastrowid
+        conn.execute('UPDATE persons SET representative_face_id=? WHERE id=?', (face, person))
+        conn.execute('INSERT INTO people_private_notes VALUES(?,?,?)', (person, 'author', 'Keep identity'))
+    clusterer = FaceClusterer(path, embedding_model=ARCFACE_MODEL)
+    with stubbed_decoder():
+        clusterer._update_database({face: -1}, np.asarray([vector]), [face], **mode)
+    with _db(path) as conn:
+        assert conn.execute('SELECT face_count,representative_face_id,face_thumbnail,centroid FROM persons WHERE id=?', (person,)).fetchone() == (0, None, None, None)
+        assert conn.execute('SELECT person_id FROM faces WHERE id=?', (face,)).fetchone() == (None,)
+        assert conn.execute('SELECT body FROM people_private_notes WHERE person_id=?', (person,)).fetchone() == ('Keep identity',)

@@ -4,6 +4,7 @@ Face clustering for Facet.
 HDBSCAN-based clustering of face embeddings into persons.
 """
 
+from db.people_graph import GRAPH_PERSON_IDS_SQL
 import sqlite3
 from collections import Counter
 from db import get_connection
@@ -506,12 +507,12 @@ class FaceClusterer:
 
             if force:
                 # Full reset - delete everything
-                conn.execute("DELETE FROM persons WHERE id NOT IN "
+                conn.execute(f"DELETE FROM persons WHERE id NOT IN ({GRAPH_PERSON_IDS_SQL}) AND id NOT IN "
                              "(SELECT person_id FROM faces WHERE is_manual=1 AND person_id IS NOT NULL)")
             elif preserve_named_only:
                 # Delete unnamed persons; their faces are re-matched below
                 deleted = conn.execute(
-                    f"DELETE FROM persons WHERE name IS NULL AND {person_match_sql} AND id NOT IN "
+                    f"DELETE FROM persons WHERE id NOT IN ({GRAPH_PERSON_IDS_SQL}) AND name IS NULL AND {person_match_sql} AND id NOT IN "
                     "(SELECT person_id FROM faces WHERE is_manual=1 AND person_id IS NOT NULL)",
                     person_match_params).rowcount
                 logger.info("  Deleted %s unnamed auto-clustered person(s)", deleted)
@@ -667,7 +668,7 @@ class FaceClusterer:
                 # accumulate run over run, so drop them -- but keep named persons and
                 # API-created (auto_clustered = 0) ones even when momentarily empty.
                 deleted_empty = conn.execute(
-                    "DELETE FROM persons WHERE name IS NULL AND auto_clustered = 1 "
+                    f"DELETE FROM persons WHERE id NOT IN ({GRAPH_PERSON_IDS_SQL}) AND name IS NULL AND auto_clustered = 1 "
                     "AND (face_count = 0 OR face_count IS NULL)"
                 ).rowcount
                 if deleted_empty:
@@ -678,8 +679,11 @@ class FaceClusterer:
             from db.person_carry_over import refresh_person_counts
             manual_persons = {r[0] for r in conn.execute(
                 'SELECT DISTINCT person_id FROM faces WHERE is_manual=1 AND person_id IS NOT NULL')}
-            refresh_person_counts(conn, manual_persons)
-            for pid in manual_persons:
+            graph_persons = {r[0] for r in conn.execute(GRAPH_PERSON_IDS_SQL)}
+            retained_persons = manual_persons | graph_persons
+            refresh_person_counts(conn, retained_persons)
+            repair_preserved_representatives(conn, retained_persons)
+            for pid in retained_persons:
                 recompute_person_centroid(conn, pid)
 
             # ONE commit for the whole phase: the person inserts, the owner write,

@@ -47,6 +47,7 @@ PUBLIC_ROUTES = [
 # user; a few (e.g. /api/plugins, the comparison reads) are edition-only since an
 # install without viewer.edition_password became read-only.
 AUTH_ROUTES = [
+    '/api/people-graph/groups',
     '/api/manual_tags/hierarchy',
     '/api/export/sidecar_jobs',
     '/api/organization_history',
@@ -99,6 +100,9 @@ AUTH_ROUTES = [
 # Routes that require auth AND take a query/path parameter. We pass a known
 # value or a deliberately bogus one — the assertion is just "no 5xx".
 PARAMETERISED_ROUTES = [
+    ('/api/people-graph/neighborhood/987654321', {}),
+    ('/api/people-graph/connections/987654321', {}),
+    ('/api/people-graph/notes/987654321', {}),
     ('/api/shared/album/1/photo', {'asset_id': '1.' + '0' * 64, 'token': 'invalid'}),
     ('/api/shared/album/1/media/thumbnail', {'asset_id': '1.' + '0' * 64, 'token': 'invalid'}),
     ('/api/shared/album/1/media/image', {'asset_id': '1.' + '0' * 64, 'token': 'invalid'}),

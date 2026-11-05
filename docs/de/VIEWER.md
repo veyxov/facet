@@ -1,5 +1,15 @@
 # Web-Galerie
 
+## Experimenteller Personengraph
+
+Der Graph füllt den Arbeitsbereich. Der Inspektor trennt Verbindungen, Gruppen und Notizen. Auf dem Smartphone erscheint eine kompakte Vorschau; Details anzeigen öffnet den vollständigen Inspektor, Escape schließt ihn.
+
+Über Neue Person, Neue Gruppe und Verbindung hinzufügen bauen Sie das Netz auf. Die Vorschau zeigt die Beziehungsrichtung. Profile bieten Umbenennen und Gesichter zuordnen mit Vorschau und Bestätigung. Nicht fixierte Knoten bewegen sich sanft; Zeigerkontakt, Ziehen, Tastatur, Pause und reduzierte Bewegung halten die Bewegung an.
+
+Ziehen Sie Porträts zum Anordnen und den Hintergrund zum Verschieben. Scrollen oder eine Zwei-Finger-Geste auf dem Hintergrund zoomt. **Graph einpassen** behält manuelle Positionen; das Zurücksetzen stellt die automatische Anordnung wieder her. Positionen gelten für diese Seitensitzung und werden beim Kontowechsel gelöscht.
+
+Öffnen Sie auf diesem lokalen experimentellen Branch **Personen → Verbindungen**, um Beziehungen und überlappende Gruppen zu erkunden. Passen Sie Tiefe und Beziehungstyp an oder wechseln Sie zur aufklappbaren Hierarchie. Notizen sind an die angemeldete Identität gebunden; ein gemeinsamer Login teilt diese Identität. Änderungen erfordern Bearbeitungsrechte; die Gruppenstruktur verwaltet ihr Ersteller. Graphdaten bleiben in der Datenbank und werden nicht in Bildmetadaten geschrieben. Verwenden Sie die [temporäre Demo](../experiments/PEOPLE_GRAPH_TESTING.md).
+
 > 🌐 [English](../VIEWER.md) · [Français](../fr/VIEWER.md) · **Deutsch** · [Italiano](../it/VIEWER.md) · [Español](../es/VIEWER.md) · [Português](../pt/VIEWER.md) · [简体中文](../zh/VIEWER.md)
 
 Die Galerie ist eine Web-App aus FastAPI und Angular zum Durchsuchen, Filtern, Aussortieren und Verwalten Ihrer Fotos.

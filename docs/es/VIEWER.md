@@ -1,5 +1,15 @@
 # Visor web
 
+## Grafo experimental de personas
+
+El gráfico ocupa el espacio de trabajo. El inspector separa Conexiones, Grupos y Notas. En el teléfono, la selección muestra una vista compacta; Mostrar detalles abre el inspector completo y Escape lo cierra.
+
+Usa Nueva persona, Nuevo grupo y Añadir conexión para construir la red. La frase muestra la dirección antes de guardar. Los perfiles permiten renombrar y asignar caras con vista previa y confirmación. Los nodos sin fijar se mueven suavemente; el puntero, arrastrar, el teclado, la pausa y el movimiento reducido detienen el movimiento.
+
+Arrastra retratos para organizarlos y el fondo para desplazar la vista. Desplázate o pellizca el fondo para ampliar. Ajustar conserva las posiciones manuales; restablecer recupera la disposición automática. Las posiciones duran esta sesión de página y se borran al cambiar de cuenta.
+
+En esta rama experimental local, abra **Personas → Conexiones** para explorar relaciones y grupos superpuestos. Cambie la profundidad, filtre tipos de relación o use la jerarquía desplegable. Las notas pertenecen a la identidad conectada; un inicio de sesión compartido comparte esa identidad. Editar requiere permisos de edición; el creador gestiona la estructura del grupo. El grafo permanece en la base de datos y no se escribe en los metadatos de imágenes. Pruebe la [demostración desechable](../experiments/PEOPLE_GRAPH_TESTING.md).
+
 > 🌐 [English](../VIEWER.md) · [Français](../fr/VIEWER.md) · [Deutsch](../de/VIEWER.md) · [Italiano](../it/VIEWER.md) · **Español** · [Português](../pt/VIEWER.md) · [简体中文](../zh/VIEWER.md)
 
 El visor es una aplicación web FastAPI + Angular para explorar, filtrar, descartar y gestionar tus fotos.

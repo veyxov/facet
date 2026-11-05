@@ -6,6 +6,8 @@ All notable changes to Facet are documented in this file.
 
 ### Added
 
+- Local experimental people graph with typed relationships, overlapping nested groups, private notes, multi-hop exploration and a disposable fictional demo. Graph data remains in the database; existing face identities and metadata writers are preserved.
+
 - Photo-detail score charts load on demand, highlight the current photo and switch between the reader’s visible library and the photo’s category. Multi-person gallery filters show color-matched face outlines, with a persistent Display toggle.
 
 - **`--evaluate-models faces-detect --face-labels PATH` measures small-face recall against hand-labelled boxes.** `python -m optimization.face_labels sample|import` builds the labelled set from your own library (labelme workflow, kept local, see `testdb/README.md`); the report gives recall per face-size bucket with bootstrap CIs, false positives per no-face photo, seconds per photo, peak VRAM and a downstream cannot-link check, for `insightface@640/1024/1280`, `insightface-tiled`, `insightface-tiled-cond` and `yunet-tiled` candidates. `insightface-tiled-cond` tiles only when the full-frame pass finds a face under 80 px (`insightface-tiled-cond@<px>` also tiles images whose longer side exceeds `<px>`); timing is taken after one untimed warm-up call and reported as mean and median, with the ship-rule time ratio on the median. Measurement only: no scan default changes.

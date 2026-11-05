@@ -525,17 +525,20 @@ def cleanup_orphaned_persons(db_path='photo_scores_pro.db', verbose=True):
     apply_pragmas(conn)
     cursor = conn.cursor()
 
+    from db.people_graph import GRAPH_PERSON_IDS_SQL
     # Count orphaned persons before deletion
-    cursor.execute("""
+    cursor.execute(f"""
         SELECT COUNT(*) FROM persons
         WHERE id NOT IN (SELECT DISTINCT person_id FROM faces WHERE person_id IS NOT NULL)
+        AND id NOT IN ({GRAPH_PERSON_IDS_SQL})
     """)
     count = cursor.fetchone()[0]
 
     if count > 0:
-        cursor.execute("""
+        cursor.execute(f"""
             DELETE FROM persons
             WHERE id NOT IN (SELECT DISTINCT person_id FROM faces WHERE person_id IS NOT NULL)
+            AND id NOT IN ({GRAPH_PERSON_IDS_SQL})
         """)
         conn.commit()
 
@@ -860,6 +863,8 @@ def _incremental_update_viewer_data(source_db, output_path, thumbnail_size, verb
 
     # Stable person identities were reconciled before face synchronization.
     merge_manual_faces(dest_conn, source_face_columns)
+    from db.people_graph import import_viewer_graph
+    import_viewer_graph(dest_conn)
     from db.ignored_faces import merge_viewer_corrections
     merge_viewer_corrections(dest_conn, path_mapping)
     dest_conn.commit()
@@ -1072,7 +1077,7 @@ def _incremental_update_viewer_data(source_db, output_path, thumbnail_size, verb
 
 
 # Tables a viewer database export must not carry (the DROP list of the full export).
-VIEWER_EXPORT_EXCLUDED_TABLES = ('logical_review_imports', 'logical_asset_imports', 'mcp_tokens', 'rating_provenance', 'organization_history',
+VIEWER_EXPORT_EXCLUDED_TABLES = ('people_private_notes', 'logical_review_imports', 'logical_asset_imports', 'mcp_tokens', 'rating_provenance', 'organization_history',
                                  'face_review_feedback',
                                  'face_update_items', 'face_update_jobs',
                                  'person_centroid_dirty',

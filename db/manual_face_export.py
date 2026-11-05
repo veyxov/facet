@@ -1,4 +1,5 @@
 """Reconcile viewer annotations without treating independent numeric IDs as identity."""
+from db.people_graph import GRAPH_PERSON_IDS_SQL
 from db.person_carry_over import refresh_person_counts
 from db.manual_faces import prune_deleted_manual_faces, without_manual_overlaps
 
@@ -18,7 +19,8 @@ def prepare_person_sync(conn):
     source = _rows(conn, 'SELECT * FROM src.persons')
     has_feedback = conn.execute("SELECT 1 FROM main.sqlite_master WHERE type='table' AND name='face_review_feedback'").fetchone()
     feedback_ids = ' UNION SELECT person_id FROM main.face_review_feedback' if has_feedback else ''
-    preserved_ids = '(SELECT person_id FROM main.faces WHERE is_manual=1 AND person_id IS NOT NULL' + feedback_ids + ')'
+    graph_ids = ' UNION ' + GRAPH_PERSON_IDS_SQL.replace('FROM people_', 'FROM main.people_')
+    preserved_ids = '(SELECT person_id FROM main.faces WHERE is_manual=1 AND person_id IS NOT NULL' + feedback_ids + graph_ids + ')'
     # Feedback belongs to this viewer. Keep its stable person identities while
     # reconciling source IDs; deleting/reinserting a person would cascade it away.
     local = _rows(conn, 'SELECT p.* FROM main.persons p WHERE p.id IN ' + preserved_ids)
@@ -56,7 +58,7 @@ def prepare_person_sync(conn):
         conn.executemany('INSERT INTO feedback_person_refresh VALUES (?)', [(pid,) for pid in retained_feedback])
         conn.execute('INSERT OR IGNORE INTO manual_person_refresh SELECT person_id FROM feedback_person_refresh')
         preserved_ids = ('(SELECT person_id FROM main.faces WHERE is_manual=1 AND person_id IS NOT NULL '
-                         'UNION SELECT person_id FROM feedback_person_refresh)')
+                         'UNION SELECT person_id FROM feedback_person_refresh' + graph_ids + ')')
     if conn.execute("SELECT 1 FROM src.sqlite_master WHERE type='table' AND name='manual_face_deletions'").fetchone():
         conn.execute('INSERT OR IGNORE INTO main.manual_face_deletions(manual_key) '
                      'SELECT manual_key FROM src.manual_face_deletions')

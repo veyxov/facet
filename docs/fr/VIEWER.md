@@ -1,5 +1,15 @@
 # Visionneuse web
 
+## Graphe de personnes expérimental
+
+Le graphe remplit désormais l’espace de travail. Le panneau sépare Connexions, Groupes et Notes. Sur téléphone, la sélection affiche un aperçu compact ; Afficher les détails ouvre le panneau complet et Échap le ferme.
+
+Utilisez Nouvelle personne, Nouveau groupe et Ajouter une connexion pour construire le réseau. La phrase prévisualise le sens avant enregistrement. Les profils permettent de renommer et d’attribuer les visages avec aperçu et confirmation. Les nœuds non déplacés dérivent doucement ; survol, glissement, clavier, pause et mouvement réduit arrêtent cette dérive.
+
+Faites glisser les portraits pour les organiser et le fond pour déplacer la vue. Défilez ou pincez le fond pour zoomer. Le cadrage conserve les positions manuelles ; la réinitialisation rétablit la disposition automatique. Les positions durent pendant cette session de page et sont effacées au changement de compte.
+
+Sur cette branche expérimentale locale, ouvrez **Personnes → Relations** pour explorer les relations typées et les groupes qui se chevauchent. Réglez la profondeur, filtrez les types ou passez à la hiérarchie dépliable. Les notes sont privées à l’identité connectée ; un compte partagé partage cette identité. La modification exige les droits d’édition ; le créateur gère la structure des groupes. Le graphe reste dans la base, sans écriture dans les métadonnées des images. Utilisez la [démo jetable](../experiments/PEOPLE_GRAPH_TESTING.md) pour tester.
+
 > 🌐 [English](../VIEWER.md) · **Français** · [Deutsch](../de/VIEWER.md) · [Italiano](../it/VIEWER.md) · [Español](../es/VIEWER.md) · [Português](../pt/VIEWER.md) · [简体中文](../zh/VIEWER.md)
 
 La visionneuse est une application web FastAPI + Angular pour parcourir, filtrer, trier et gérer vos photos.

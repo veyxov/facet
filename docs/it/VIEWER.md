@@ -1,5 +1,15 @@
 # Galleria web
 
+## Grafo sperimentale delle persone
+
+Il grafico riempie lo spazio di lavoro. Il pannello separa Collegamenti, Gruppi e Note. Sul telefono la selezione mostra un’anteprima compatta; Mostra dettagli apre il pannello completo ed Escape lo chiude.
+
+Usa Nuova persona, Nuovo gruppo e Aggiungi collegamento per creare la rete. La frase mostra la direzione prima del salvataggio. I profili consentono di rinominare e assegnare volti con anteprima e conferma. I nodi non fissati si muovono leggermente; puntatore, trascinamento, tastiera, pausa e movimento ridotto fermano il movimento.
+
+Trascina i ritratti per disporli e lo sfondo per spostare la vista. Scorri o pizzica lo sfondo per ingrandire. Adattare mantiene le posizioni manuali; il ripristino recupera la disposizione automatica. Le posizioni durano per questa sessione della pagina e vengono cancellate al cambio di account.
+
+In questo ramo sperimentale locale, apri **Persone → Collegamenti** per esplorare relazioni e gruppi sovrapposti. Cambia profondità, filtra i tipi o passa alla gerarchia espandibile. Le note sono private per l’identità connessa; un accesso condiviso condivide tale identità. Le modifiche richiedono permessi di modifica; il creatore gestisce la struttura dei gruppi. Il grafo resta nel database e non viene scritto nei metadati delle immagini. Usa la [demo temporanea](../experiments/PEOPLE_GRAPH_TESTING.md).
+
 > 🌐 [English](../VIEWER.md) · [Français](../fr/VIEWER.md) · [Deutsch](../de/VIEWER.md) · **Italiano** · [Español](../es/VIEWER.md) · [Português](../pt/VIEWER.md) · [简体中文](../zh/VIEWER.md)
 
 La galleria è un'app web FastAPI + Angular per sfogliare, filtrare, selezionare e gestire le tue foto.

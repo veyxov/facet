@@ -1484,6 +1484,8 @@ def init_database(db_path='photo_scores_pro.db', build_photo_indexes=True):
         ))
         from db.keyword_hierarchy import create_keyword_hierarchy_schema
         create_keyword_hierarchy_schema(conn)
+        from db.people_graph import create_schema as create_people_graph_schema
+        create_people_graph_schema(conn)
 
         # Create photo_objects (user-marked labelled boxes; side table, survives rescans)
         conn.execute(_build_create_table_sql('photo_objects', PHOTO_OBJECTS_COLUMNS))

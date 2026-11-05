@@ -49,6 +49,11 @@ _NON_ASSET_PATHS = {
 # Historical payload JSON and the global revision clock are not asset links.
 # Keep the exact column inventory so future additions still require review.
 _AUXILIARY_COLUMNS = {
+    'people_connection_types': {'id', 'forward_label', 'reverse_label', 'mutual', 'ancestry'},
+    'people_connections': {'id', 'source_id', 'target_id', 'type_id', 'starts_on', 'ends_on', 'created_by'},
+    'people_groups': {'id', 'name', 'parent_id', 'created_by'},
+    'people_group_members': {'group_id', 'person_id'},
+    'people_private_notes': {'person_id', 'owner', 'body'},
     'logical_review_seeds': {'asset_id', 'photo_path'},
     'logical_review_fields': {'asset_id', 'owner', 'field', 'value', 'origin'},
     'logical_review_versions': {'asset_id', 'owner', 'revision'},

@@ -17,6 +17,11 @@ const EDITION_ONLY = {
 
 export const routes: Routes = [
   {
+    path: 'people-graph',
+    loadComponent: () => import('./features/persons/people-graph.component').then(m => m.PeopleGraphComponent),
+    canActivate: [authGuard],
+  },
+  {
     path: 'photo-compare',
     loadComponent: () => import('./features/gallery/comparison-workspace.component').then(m => m.ComparisonWorkspaceComponent),
     canActivate: [authGuard, () => inject(ComparisonSessionService).snapshot().photos.length >= 2 || inject(Router).parseUrl('/')],
