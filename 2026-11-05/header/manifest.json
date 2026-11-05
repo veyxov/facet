@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-05",
+  "before": "cf36403e",
+  "after": "d6d1b4b89e50d63c9c9e75b88bfdb3dee3467627",
+  "note": "Gallery header only. Same disposable 116-photo library, light theme and query; no private library images. Desktop CSS viewport1465x240; phone390x300. Browser screenshots retain their native pixel dimensions.",
+  "images": [
+    {
+      "path": "2026-11-05/header/before-desktop.png"
+    },
+    {
+      "path": "2026-11-05/header/after-desktop.png"
+    },
+    {
+      "path": "2026-11-05/header/before-phone.png"
+    },
+    {
+      "path": "2026-11-05/header/after-phone.png"
+    }
+  ]
+}
