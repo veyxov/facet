@@ -1,5 +1,15 @@
 # Web Viewer
 
+## Experimental people graph
+
+The graph now fills the workspace. The inspector separates Connections, Groups and Notes. On phones, selection shows a compact person peek; Show details opens the full inspector, and Escape closes it.
+
+Use **New person**, **New group** and **Add connection** above either view to build the network. The relationship sentence previews direction before saving. Profiles offer renaming and **Assign faces**, which opens the existing preview/confirm workflow. Unpinned graph nodes drift gently; hovering, dragging, keyboard use, Pause and reduced motion stop the drift.
+
+Drag any portrait to arrange the graph, drag the background to pan, and scroll or pinch the background to zoom. **Fit graph** keeps manual positions; **Reset layout** restores the automatic arrangement. Positions last for this page session and clear when the account changes.
+
+On this local experimental branch, open **Persons → Connections** to explore typed relationships and overlapping groups. Change connection depth, filter relationship types, or switch between graph and expandable hierarchy views. Notes are private to the signed-in identity; a shared login shares that identity. Editing requires edition permission, and group structure is managed by its creator. Graph data stays in the database and is not written to image metadata. Test with the disposable demo described in [People graph testing](experiments/PEOPLE_GRAPH_TESTING.md).
+
 > 🌐 **English** · [Français](fr/VIEWER.md) · [Deutsch](de/VIEWER.md) · [Italiano](it/VIEWER.md) · [Español](es/VIEWER.md) · [Português](pt/VIEWER.md) · [简体中文](zh/VIEWER.md)
 
 The viewer is a FastAPI + Angular web app for browsing, filtering, culling and managing your photos.

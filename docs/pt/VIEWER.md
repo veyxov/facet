@@ -1,5 +1,15 @@
 # Visualizador Web
 
+## Grafo experimental de pessoas
+
+O grafo ocupa a área de trabalho. O inspetor separa Ligações, Grupos e Notas. No telefone, a seleção mostra uma vista compacta; Mostrar detalhes abre o inspetor completo e Escape fecha-o.
+
+Use Nova pessoa, Novo grupo e Adicionar ligação para construir a rede. A frase mostra a direção antes de guardar. Os perfis permitem renomear e atribuir rostos com pré-visualização e confirmação. Os nós não fixados movem-se suavemente; o ponteiro, arrastar, teclado, pausa e movimento reduzido param o movimento.
+
+Arraste retratos para organizá-los e o fundo para mover a vista. Role ou faça um gesto de pinça no fundo para ampliar. Ajustar mantém as posições manuais; repor restaura a disposição automática. As posições duram esta sessão da página e são apagadas ao mudar de conta.
+
+Neste ramo experimental local, abra **Pessoas → Ligações** para explorar relações e grupos sobrepostos. Altere a profundidade, filtre tipos de relação ou use a hierarquia expansível. As notas pertencem à identidade autenticada; um acesso partilhado partilha essa identidade. Editar exige permissões de edição; o criador gere a estrutura dos grupos. O grafo fica na base de dados e não é escrito nos metadados das imagens. Use a [demonstração descartável](../experiments/PEOPLE_GRAPH_TESTING.md).
+
 > 🌐 [English](../VIEWER.md) · [Français](../fr/VIEWER.md) · [Deutsch](../de/VIEWER.md) · [Italiano](../it/VIEWER.md) · [Español](../es/VIEWER.md) · **Português** · [简体中文](../zh/VIEWER.md)
 
 O visualizador é uma aplicação web em FastAPI + Angular para navegar, filtrar, fazer a triagem e gerenciar suas fotos.

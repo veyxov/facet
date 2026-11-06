@@ -627,6 +627,8 @@ def create_app() -> FastAPI:
     app.include_router(ignored_faces_router)
     app.include_router(face_matches_router)
     app.include_router(persons_router)
+    from api.routers.people_graph import router as people_graph_router
+    app.include_router(people_graph_router)
     app.include_router(merge_suggestions_router)
     app.include_router(comparison_router)
     app.include_router(stats_router)

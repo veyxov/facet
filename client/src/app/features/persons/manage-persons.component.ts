@@ -280,6 +280,7 @@ export type NamingSort = 'faces' | 'recent';
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <ng-template #personsToolbar>
+      <a routerLink="/people-graph" class="mx-2 rounded-lg border border-[var(--mat-sys-outline-variant)] px-3 py-2 text-sm focus-visible:outline-2">{{ I18N.people_graph.title | translate }}</a>
       @if (namingTabActive()) {
         <mat-form-field class="!hidden lg:!inline-flex w-44 ml-2" subscriptSizing="dynamic">
           <mat-label>{{ I18N.gallery.sort | translate }}</mat-label>

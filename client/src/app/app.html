@@ -64,7 +64,7 @@
         }
       </div>
       @if (auth.isEdition()) {
-        <button mat-icon-button (click)="openOrganizationHistory()" [matTooltip]="I18N.organization_history.title | translate" [attr.aria-label]="I18N.organization_history.title | translate"><mat-icon>history</mat-icon></button>
+        <button mat-icon-button class="focus-visible:!outline-2 focus-visible:!outline-solid focus-visible:!outline-[var(--mat-sys-primary)] focus-visible:!outline-offset-2" (click)="openOrganizationHistory()" [matTooltip]="I18N.organization_history.title | translate" [attr.aria-label]="I18N.organization_history.title | translate"><mat-icon>history</mat-icon></button>
       }
       <app-assistant-activity-chip />
       @if (isGalleryRoute()) { @if (myTasteBadge(); as taste) {
@@ -348,7 +348,7 @@
            Help lives in this menu too (opens the page-help dialog) — the
            standalone header button was removed when it moved here. -->
       @if (auth.isAuthenticated()) {
-        <button mat-icon-button [matMenuTriggerFor]="userMenu" [matTooltip]="auth.status()?.display_name || (I18N.auth.user_menu | translate)" [attr.aria-label]="auth.status()?.display_name || (I18N.auth.user_menu | translate)">
+        <button mat-icon-button class="focus-visible:!outline-2 focus-visible:!outline-solid focus-visible:!outline-[var(--mat-sys-primary)] focus-visible:!outline-offset-2" [matMenuTriggerFor]="userMenu" [matTooltip]="auth.status()?.display_name || (I18N.auth.user_menu | translate)" [attr.aria-label]="auth.status()?.display_name || (I18N.auth.user_menu | translate)">
           <mat-icon [class.!text-amber-400]="auth.isEdition()">{{ auth.isEdition() ? 'admin_panel_settings' : 'account_circle' }}</mat-icon>
         </button>
         <mat-menu #userMenu="matMenu">

@@ -979,3 +979,59 @@ def test_logical_history_receipts_stay_private_and_viewer_history_survives_reexp
     with sqlite3.connect(out) as conn:
         assert conn.execute("SELECT owner,kind FROM organization_history").fetchall() == [('private-viewer-logical-history-actor', 'logical_review')]
     assert b'private-logical-source-history-actor' not in Path(out).read_bytes()
+
+
+def test_people_graph_survives_repeated_exports_without_private_note_disclosure(tmp_path):
+    from db.people_graph import add_connection
+    src, out = str(tmp_path / 'source.db'), str(tmp_path / 'viewer.db')
+    _make_source_db(src)
+    with sqlite3.connect(src) as conn:
+        first = conn.execute("INSERT INTO persons(name) VALUES('Graph Alice')").lastrowid
+        second = conn.execute("INSERT INTO persons(name) VALUES('Graph Ben')").lastrowid
+        add_connection(conn, first, second, 'friend', 'scanner')
+        conn.execute('INSERT INTO people_private_notes VALUES(?,?,?)', (first, 'scanner', 'Source secret'))
+    export_viewer_db(src, out, verbose=False)
+    with sqlite3.connect(out) as conn:
+        assert not conn.execute("SELECT 1 FROM sqlite_master WHERE name='people_private_notes'").fetchone()
+    init_database(out)
+    with sqlite3.connect(out) as conn:
+        conn.execute('INSERT INTO people_private_notes VALUES(?,?,?)', (first, 'viewer', 'Local secret'))
+    for _ in range(2):
+        export_viewer_db(src, out, verbose=False)
+        with sqlite3.connect(out) as conn:
+            assert conn.execute('SELECT COUNT(*) FROM people_connections').fetchone()[0] == 1
+            assert conn.execute('SELECT owner,body FROM people_private_notes').fetchall() == [('viewer', 'Local secret')]
+            assert conn.execute('PRAGMA foreign_key_check').fetchall() == []
+
+
+def test_incremental_graph_import_maps_people_and_preserves_local_uuid_edits(tmp_path):
+    from db.people_graph import add_connection
+    src, out = str(tmp_path / 'source.db'), str(tmp_path / 'viewer.db')
+    _make_source_db(src)
+    export_viewer_db(src, out, verbose=False)
+    init_database(out)
+    with sqlite3.connect(out) as conn:
+        local = conn.execute("INSERT INTO persons(name) VALUES('Viewer local person')").lastrowid
+        conn.execute('INSERT INTO people_private_notes VALUES(?,?,?)', (local, 'viewer', 'Keep local identity'))
+    with sqlite3.connect(src) as conn:
+        first = conn.execute("INSERT INTO persons(name) VALUES('Source Alice')").lastrowid
+        second = conn.execute("INSERT INTO persons(name) VALUES('Source Ben')").lastrowid
+        assert first == local
+        conn.execute("INSERT INTO people_connection_types VALUES('mentor-test','Mentor of','Mentee of',0,0)")
+        edge = add_connection(conn, first, second, 'mentor-test', 'source')
+        conn.executemany('INSERT INTO people_groups VALUES(?,?,?,?)', [('parent-test', 'Work', None, 'source'), ('child-test', 'Team', 'parent-test', 'source')])
+        conn.execute("INSERT INTO people_group_members VALUES('child-test',?)", (first,))
+    export_viewer_db(src, out, verbose=False)
+    with sqlite3.connect(out) as conn:
+        row = conn.execute('SELECT c.id,c.source_id,c.target_id,a.name,b.name,t.forward_label FROM people_connections c JOIN persons a ON a.id=c.source_id JOIN persons b ON b.id=c.target_id JOIN people_connection_types t ON t.id=c.type_id').fetchone()
+        assert row[0] == edge
+        assert row[1] != first
+        assert row[3:] == ('Source Alice', 'Source Ben', 'Mentor of')
+        assert conn.execute("SELECT parent_id FROM people_groups WHERE id='child-test'").fetchone() == ('parent-test',)
+        assert conn.execute("SELECT p.name FROM people_group_members m JOIN persons p ON p.id=m.person_id WHERE m.group_id='child-test'").fetchone() == ('Source Alice',)
+        conn.execute('UPDATE people_connections SET starts_on=? WHERE id=?', ('2026-01-01', edge))
+    export_viewer_db(src, out, verbose=False)
+    with sqlite3.connect(out) as conn:
+        assert conn.execute('SELECT starts_on FROM people_connections WHERE id=?', (edge,)).fetchone() == ('2026-01-01',)
+        assert conn.execute('SELECT name FROM persons WHERE id=?', (local,)).fetchone() == ('Viewer local person',)
+        assert conn.execute('PRAGMA foreign_key_check').fetchall() == []

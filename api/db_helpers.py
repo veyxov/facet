@@ -1296,7 +1296,8 @@ def reassign_faces_to_person(conn, person_id, face_ids):
         row = conn.execute(
             "SELECT face_count FROM persons WHERE id = ?", (old_id,)
         ).fetchone()
-        if row and row[0] == 0:
+        from db.people_graph import person_has_graph
+        if row and row[0] == 0 and not person_has_graph(conn, old_id):
             conn.execute("DELETE FROM persons WHERE id = ?", (old_id,))
             deleted_persons.append(old_id)
         else:

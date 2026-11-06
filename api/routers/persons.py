@@ -17,6 +17,7 @@ from api.db_helpers import (
     assert_faces_visible, get_visibility_clause, reassign_faces_to_person, person_visibility_exists,
     person_unnamed_clause, select_in_chunks, is_locked_error, retry_on_locked,
 )
+from db.people_graph import PeopleGraphError, merge_person as merge_person_graph
 from db import person_not_hidden_clause
 from db.embedding_space import ARCFACE_MODEL, active_embedding_model, tag_matches
 from db.person_centroids import recompute_person_centroid
@@ -361,6 +362,8 @@ def _do_merge(source_id: int, target_id: int, user_id):
             #    clustering and future merge suggestions match the merged person.
             recompute_person_centroid(conn, target_id)
 
+            merge_person_graph(conn, source_id, target_id)
+
             # 4. Delete source person
             conn.execute("DELETE FROM persons WHERE id = ?", (source_id,))
 
@@ -370,6 +373,9 @@ def _do_merge(source_id: int, target_id: int, user_id):
             return {"success": True, "new_count": count}
         except HTTPException:
             raise
+        except PeopleGraphError as exc:
+            conn.rollback()
+            raise HTTPException(409, str(exc)) from exc
         except sqlite3.Error:
             logger.exception("Database error merging person %d into %d", source_id, target_id)
             conn.rollback()
@@ -455,6 +461,8 @@ def merge_persons_batch(
                 )
                 # Recompute the surviving target's centroid over its merged faces.
                 recompute_person_centroid(conn, target_id)
+                for source_id in ids:
+                    merge_person_graph(conn, source_id, target_id)
                 # Delete the folded persons
                 conn.execute(
                     f"DELETE FROM persons WHERE id IN ({placeholders})", ids
@@ -468,6 +476,9 @@ def merge_persons_batch(
                 "targets": sorted(groups),
                 "merged_count": merged_total,
             }
+        except PeopleGraphError as exc:
+            conn.rollback()
+            raise HTTPException(409, str(exc)) from exc
         except sqlite3.Error:
             logger.exception("Database error in batch merge (%d pairs)", len(pairs))
             conn.rollback()
