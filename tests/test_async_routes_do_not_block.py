@@ -282,6 +282,8 @@ EXPECTED_NON_2XX = {
     ('POST', '/api/logical_assets/preview'): 404,
     ('POST', '/api/logical_assets/apply'): 409,
     ('GET', '/api/download/options'): 404,  # the seeded row has no file on disk
+    ('GET', '/api/photo/darktable'): 404,  # the seeded row has no file on disk
+    ('GET', '/api/photo/darktable/download'): 404,  # and no darktable rendition
     ('GET', '/api/frame/photos'): 404,  # frame.tokens is empty: the feature 404s
     ('GET', '/api/frame/next'): 404,
     ('GET', '/api/frame/image/1.deadbeef'): 404,

@@ -2168,7 +2168,6 @@
     "hidden_done": "Personne ignorée",
     "unhidden_done": "Personne rétablie",
     "hide_error": "Échec de la mise à jour de la visibilité",
-    "split": "Séparer en une nouvelle personne",
     "split_action": "Séparer ({count})",
     "split_dialog_title": "Séparer en une nouvelle personne",
     "split_dialog_desc": "Sélectionnez les visages à déplacer vers une nouvelle personne.",
@@ -4090,5 +4089,32 @@
       "scope_changed": "La sélection capturée ou les options ont changé. Prévisualisez à nouveau.",
       "changed": "Cibles : {targets}. Photos modifiées : {photos} ; attributions modifiées : {assignments}."
     }
+  },
+  "darktable_edit": {
+    "title": "Modifier dans darktable",
+    "instructions": "Ouvrez et modifiez la photo dans darktable. Facet applique la modification quelques secondes après son enregistrement par darktable (quittez la chambre noire ou changez d’image) et conserve l’original.",
+    "preservation": "L’image modifiée remplace l’affichage dans la même entrée. Les originaux, EXIF, lieux, personnes, notes et albums sont conservés. Les coordonnées des visages, scores et analyses décrivent toujours l’original. Les téléchargements originaux restent inchangés.",
+    "setup": "Activez FACET_DARKTABLE_EDIT=1, installez darktable et ExifTool sur l’ordinateur du serveur, puis redémarrez Facet.",
+    "open": "Ouvrir darktable",
+    "apply": "Appliquer les modifications",
+    "revert": "Revenir à l’original",
+    "download": "Télécharger le JPEG XL modifié",
+    "original": "Original",
+    "edited": "Modifiée",
+    "badge": "Modifiée dans darktable",
+    "watching": "En attente de l’enregistrement de votre modification par darktable…",
+    "current_edit": "Modification actuelle",
+    "details": "Ce qui reste inchangé",
+    "applied": "Modification appliquée. L’original est conservé.",
+    "reverted": "Retour à l’original.",
+    "compare": "Comparer l’original et la version modifiée",
+    "compare_hint": "Faites défiler pour zoomer, glissez pour déplacer. Les deux photos bougent ensemble. Double-clic pour réinitialiser.",
+    "close": "Fermer",
+    "failed": "Échec de l’opération. Rechargez l’état avant de réessayer.",
+    "failed_open": "Impossible d’ouvrir darktable. Rechargez l’état et réessayez.",
+    "failed_apply": "Impossible d’appliquer la modification ; l’image précédente est inchangée. Enregistrez-la à nouveau dans darktable, ou rechargez et réessayez.",
+    "failed_revert": "Impossible de revenir à l’original. Rechargez l’état et réessayez.",
+    "failed_download": "Impossible de télécharger l’image modifiée. Réessayez.",
+    "reload": "Recharger l’état"
   }
 }

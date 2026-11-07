@@ -2168,7 +2168,6 @@
     "hidden_done": "已忽略此人",
     "unhidden_done": "已恢复此人",
     "hide_error": "更新人物可见性失败",
-    "split": "拆分为新人物",
     "split_action": "拆分（{count}）",
     "split_dialog_title": "拆分为新人物",
     "split_dialog_desc": "选择要移至新人物的人脸。",
@@ -4090,5 +4089,32 @@
       "scope_changed": "已捕获的选择或选项发生变化。请重新预览。",
       "changed": "目标：{targets}。已更改照片：{photos}；已更改分配：{assignments}。"
     }
+  },
+  "darktable_edit": {
+    "title": "在 darktable 中编辑",
+    "instructions": "在 darktable 中打开并编辑照片。darktable 保存后（离开暗房或切换图片）几秒内，Facet 会自动应用编辑并保留原图。",
+    "preservation": "编辑版本将替换同一图库条目中的显示。原件、EXIF、位置、人物、评分和相册均保留。人脸坐标、评分和搜索分析仍对应原件。原件下载保持不变。",
+    "setup": "启用 FACET_DARKTABLE_EDIT=1，在服务器电脑上安装 darktable 和 ExifTool，然后重启 Facet。",
+    "open": "打开 darktable",
+    "apply": "应用已保存的编辑",
+    "revert": "恢复原件",
+    "download": "下载编辑后的 JPEG XL",
+    "original": "原图",
+    "edited": "已编辑",
+    "badge": "已在 darktable 中编辑",
+    "watching": "正在等待 darktable 保存你的编辑…",
+    "current_edit": "当前编辑",
+    "details": "哪些内容保持不变",
+    "applied": "已应用编辑，原图已保留。",
+    "reverted": "已恢复为原图。",
+    "compare": "对比原图与编辑后",
+    "compare_hint": "滚动缩放，拖动平移。两张照片同步移动。双击重置。",
+    "close": "关闭",
+    "failed": "操作失败。请重新加载状态后重试。",
+    "failed_open": "无法打开 darktable。请重新加载状态后重试。",
+    "failed_apply": "无法应用编辑；之前的图像保持不变。请在 darktable 中重新保存，或重新加载后重试。",
+    "failed_revert": "无法恢复为原图。请重新加载状态后重试。",
+    "failed_download": "无法下载编辑后的图像。请重试。",
+    "reload": "重新加载状态"
   }
 }

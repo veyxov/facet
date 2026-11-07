@@ -41,6 +41,7 @@ export const FALLBACK_ASPECT = 4 / 3;
  * preview) read the same three sources in the same order.
  */
 export function aspectOf(photo: Photo): number {
+  if (photo.display_aspect && photo.display_aspect > 0) return photo.display_aspect;
   if (photo.image_width && photo.image_height) {
     return photo.image_width / photo.image_height;
   }

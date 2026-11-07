@@ -20,6 +20,7 @@ export function thumbnailUrl(path: string, size?: number, revision?: string | nu
   const params = new URLSearchParams({ path });
   if (size) params.set('size', String(size));
   if (revision) params.set('preview', revision);
+  if (revision?.startsWith('dt-')) params.set('ngsw-bypass', '1');
   if (size && size > STORED_THUMBNAIL_EDGE) {
     params.set('v', RENDER_URL_VERSION);
     params.set('ngsw-bypass', '1');
@@ -39,6 +40,7 @@ export function imageUrl(path: string, fallbackThumbnail = false, revision?: str
   const params = new URLSearchParams({ path });
   if (fallbackThumbnail) params.set('fallback', 'thumbnail');
   if (revision) params.set('preview', revision);
+  if (revision?.startsWith('dt-')) params.set('ngsw-bypass', '1');
   return `/image?${params}`;
 }
 
