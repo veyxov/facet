@@ -207,6 +207,21 @@ cp "$INPUT" "$OUTPUT"
 
 ## darktable
 
+### Retorno de ediciones del escritorio (experimental)
+
+Activa FACET_DARKTABLE_EDIT=1, instala darktable y ExifTool en el equipo del servidor y reinicia Facet.
+
+Abre y edita la foto en darktable. Facet aplica la edición automáticamente unos segundos después de que darktable guarde el archivo XMP (sal del cuarto oscuro o cambia de imagen) y conserva el original. Mantén este diálogo abierto mientras editas. darktable se abre en el equipo que ejecuta Facet.
+
+Las fotos editadas llevan un pequeño icono de ajustes en la galería. El icono de comparar en la vista de la foto muestra el original junto a la edición con zoom sincronizado. «Restaurar la original» recupera la imagen; la descarga entrega la edición en JPEG XL (calidad 97).
+
+La edición sustituye la imagen mostrada en la misma entrada. Se conservan originales, EXIF, ubicaciones, personas, valoraciones y álbumes. Las coordenadas faciales, puntuaciones y análisis siguen describiendo el original. Las descargas originales no cambian.
+
+El archivo original permanece intacto. Las regiones faciales y los objetos no se superponen a la edición. Las anotaciones guardadas solo en Facet no se incorporan automáticamente al JPEG XL. Las exportaciones completas de la base excluyen imágenes e historiales privados; las incrementales conservan las ediciones del destino. Un original sustituido, sin conexión o reenlazado desactiva la edición hasta volver a aplicarla.
+
+Limits: 512 MiB / 8 MiB XMP / 60 MP / 64 MiB / 120 s.
+
+
 Consulta [Configuración — Visor](CONFIGURATION.md#visor) (perfiles de exportación y estilos de `viewer.raw_processor.darktable`) y [Visor — Descarga](VIEWER.md#descarga) (conversiones `type=darktable`).
 
 darktable guarda su historial de edición en su propio `<image><ext>.xmp`. El escritor ExifTool de Facet se fusiona en ese archivo y conserva los nodos `darktable:history` y de máscaras. El comportamiento de sidecars de Lightroom descrito arriba (exportación/importación, gana el más reciente, unión de tags) se aplica tal cual, y no hay discrepancia de nombres RAW: ambos usan `<image><ext>.xmp`.

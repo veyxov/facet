@@ -165,6 +165,71 @@ describe('PhotoDetailComponent', () => {
     mockDialog = { open: vi.fn(() => ({ afterClosed: () => of(undefined) })), openDialogs: [] };
   });
 
+  it.each([false, true])('publishes a returned darktable edit only in its current visit (navigate=%s)', async (navigate) => {
+    createComponent();
+    const original = makePhoto({ path: '/edit.jpg', preview_revision: 'old' });
+    component.photo.set(original);
+    const store = TestBed.inject(GalleryStore);
+    store.photos.set([original]);
+    const patch = vi.spyOn(store, 'patchPhoto');
+    const closed = new Subject<'apply' | 'revert'>();
+    const response = new Subject<ReturnType<typeof makePhoto>>();
+    const close = vi.fn();
+    const notice = vi.spyOn(component.snackBar, 'open');
+    mockDialog.open.mockReturnValue({ afterClosed: () => closed.asObservable(), close });
+    mockApi.get.mockImplementation((url: string) => url === '/photo' ? response.asObservable() : of({}));
+    await component.editInDarktable(original);
+    closed.next('apply');
+    closed.complete();
+    expect(mockApi.get).toHaveBeenCalledWith('/photo', { path: '/edit.jpg' });
+    if (navigate) {
+      (mockRouter.events as Subject<unknown>).next(new NavigationStart(2, '/photo?path=/other.jpg'));
+      // Returning to the same path is a different visit too.
+      component.photo.set({ ...original, preview_revision: 'newer-visit' });
+    }
+    response.next({ ...original, preview_revision: 'dt-returned', display_aspect: 2 / 3 });
+    response.complete();
+    await Promise.resolve();
+    await Promise.resolve();
+    await Promise.resolve();
+    if (navigate) {
+      expect(close).toHaveBeenCalled();
+      expect(patch).not.toHaveBeenCalled();
+      expect(component.photo().preview_revision).toBe('newer-visit');
+    } else {
+      expect(patch).toHaveBeenCalledWith('/edit.jpg', expect.objectContaining({ preview_revision: 'dt-returned' }));
+      expect(component.photo().display_aspect).toBe(2 / 3);
+      expect(notice).toHaveBeenCalledWith('darktable_edit.applied', '', expect.anything());
+    }
+  });
+
+  it('says a revert was a revert', async () => {
+    createComponent();
+    const original = makePhoto({ path: '/edit.jpg', display_aspect: 1.5 });
+    component.photo.set(original);
+    const closed = new Subject<'apply' | 'revert'>();
+    const notice = vi.spyOn(component.snackBar, 'open');
+    mockDialog.open.mockReturnValue({ afterClosed: () => closed.asObservable(), close: vi.fn() });
+    mockApi.get.mockImplementation((url: string) => url === '/photo' ? of({ ...original, display_aspect: null }) : of({}));
+    await component.editInDarktable(original);
+    closed.next('revert');
+    await vi.waitFor(() => expect(notice).toHaveBeenCalledWith('darktable_edit.reverted', '', expect.anything()));
+  });
+
+  it('offers the original/edit comparison only for an edited photo', async () => {
+    const view = renderDetail();
+    const compare = () => (view.nativeElement as HTMLElement).querySelector('[aria-label="darktable_edit.compare"]');
+    view.componentInstance.photo.set(makePhoto({ path: samplePhoto.path }));
+    view.detectChanges();
+    await view.whenStable();
+    expect(compare()).toBeNull();
+    view.componentInstance.photo.set(makePhoto({ path: samplePhoto.path, display_aspect: 1.5 }));
+    view.detectChanges();
+    await view.whenStable();
+    expect(compare()).not.toBeNull();
+    expect((view.nativeElement as HTMLElement).querySelectorAll('[aria-label="darktable_edit.compare"]').length).toBe(2);
+  });
+
   it('opens the manual editor with no detections and patches confirmed membership after navigation', async () => {
     createComponent();
     const original = makePhoto({ path: '/zero.jpg', face_count: 0, unassigned_faces: 0, persons: [] });

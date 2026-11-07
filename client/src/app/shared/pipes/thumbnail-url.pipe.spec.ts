@@ -124,3 +124,13 @@ describe('per-photo preview revisions', () => {
     expect(new ImageUrlPipe().transform('/a.jpg', false, 'new')).toContain('preview=new');
   });
 });
+
+
+describe('desktop edit rendition caching', () => {
+  it('bypasses service worker caching even for stored-size mutable renditions', () => {
+    const edited = new ThumbnailUrlPipe().transform('/a.jpg', 640, 'dt-one');
+    expect(new URL(edited, 'http://localhost').searchParams.get('ngsw-bypass')).toBe('1');
+    const ordinary = new ThumbnailUrlPipe().transform('/a.jpg', 640, 'scan-one');
+    expect(new URL(ordinary, 'http://localhost').searchParams.has('ngsw-bypass')).toBe(false);
+  });
+});

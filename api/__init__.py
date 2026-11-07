@@ -737,6 +737,8 @@ def create_app() -> FastAPI:
     app.include_router(histogram_router)
     app.include_router(social_crop_router)
     app.include_router(portfolio_router)
+    from api.routers.darktable_edits import router as darktable_edits_router
+    app.include_router(darktable_edits_router)
     app.include_router(cull_preview_router)
     app.include_router(frame_router)
     app.include_router(webdav_router)

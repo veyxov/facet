@@ -207,6 +207,21 @@ cp "$INPUT" "$OUTPUT"
 
 ## darktable
 
+### Ritorno delle modifiche dal desktop (sperimentale)
+
+Abilita FACET_DARKTABLE_EDIT=1, installa darktable ed ExifTool sul computer del server e riavvia Facet.
+
+Apri e modifica la foto in darktable. Facet applica la modifica automaticamente pochi secondi dopo che darktable salva il file XMP (esci dalla camera oscura o cambia immagine) e conserva l’originale. Tieni aperta questa finestra mentre modifichi. darktable si apre sul computer che esegue Facet.
+
+Le foto modificate mostrano una piccola icona di regolazioni nella galleria. L’icona di confronto nella vista foto affianca originale e modifica con zoom sincronizzato. «Ripristina l’originale» riporta la visualizzazione; il download fornisce la modifica in JPEG XL (qualità 97).
+
+La versione modificata sostituisce la visualizzazione nella stessa voce. Originali, EXIF, luoghi, persone, valutazioni e album vengono conservati. Coordinate dei volti, punteggi e analisi descrivono ancora l’originale. I download originali restano invariati.
+
+Il file originale rimane intatto. Le regioni dei volti e gli oggetti non vengono sovrapposti alla versione modificata. Le annotazioni presenti solo in Facet non vengono incorporate automaticamente nel JPEG XL. Le esportazioni complete del database escludono immagini e cronologie private; quelle incrementali conservano le modifiche della destinazione. Un originale sostituito, offline o ricollegato disattiva la versione modificata finché non viene applicata nuovamente.
+
+Limits: 512 MiB / 8 MiB XMP / 60 MP / 64 MiB / 120 s.
+
+
 Vedi [Configurazione — Viewer](CONFIGURATION.md#viewer) (profili e stili di esportazione `viewer.raw_processor.darktable`) e [Viewer — Download](VIEWER.md#download) (conversioni `type=darktable`).
 
 darktable memorizza la propria cronologia di modifiche in un proprio `<immagine><ext>.xmp`. Lo scrittore ExifTool di Facet si fonde in quel file e conserva i nodi `darktable:history` e delle maschere. Il comportamento dei sidecar descritto sopra per Lightroom (esportazione/importazione, vince il più recente, unione dei tag) si applica così com'è, e non c'è alcuna discrepanza nei nomi RAW: entrambi usano `<immagine><ext>.xmp`.

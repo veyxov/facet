@@ -365,6 +365,15 @@ const DEFAULT_CLIPPING_BADGE_PERCENT = 5;
           </div>
         }
 
+        <!-- Edited in darktable: the display is a returned rendition; the original is kept. -->
+        @if (photo().display_aspect) {
+          <div class="absolute top-1.5 z-20 pointer-events-none flex items-center px-1.5 py-0.5 rounded bg-black/60 transition-opacity md:group-hover/img:opacity-0"
+               [class]="clipping() ? 'right-9' : 'right-1.5'"
+               role="img" [attr.aria-label]="I18N.darktable_edit.badge | translate">
+            <mat-icon class="!text-base !w-4 !h-4 !leading-4 !text-white drop-shadow-md" aria-hidden="true">photo_filter</mat-icon>
+          </div>
+        }
+
         <!-- An AI edit: ✨ is kept for what an AI made or picked. Top centre, the one
              edge no other badge uses; like the clipping badge it fades under the hover bar. -->
         @if (photo().ai_edit_of) {

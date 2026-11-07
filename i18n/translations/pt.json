@@ -2168,7 +2168,6 @@
     "hidden_done": "Pessoa ignorada",
     "unhidden_done": "Pessoa restaurada",
     "hide_error": "Falha ao atualizar a visibilidade da pessoa",
-    "split": "Dividir em nova pessoa",
     "split_action": "Dividir ({count})",
     "split_dialog_title": "Dividir em nova pessoa",
     "split_dialog_desc": "Selecione os rostos para mover para uma nova pessoa.",
@@ -4090,5 +4089,32 @@
       "scope_changed": "A seleção capturada ou as opções mudaram. Pré-visualize novamente.",
       "changed": "Destinos: {targets}. Fotos alteradas: {photos}; atribuições alteradas: {assignments}."
     }
+  },
+  "darktable_edit": {
+    "title": "Editar no darktable",
+    "instructions": "Abra e edite a foto no darktable. O Facet aplica a edição alguns segundos depois de o darktable a guardar (saia da câmara escura ou mude de imagem) e mantém o original.",
+    "preservation": "A edição substitui a imagem apresentada na mesma entrada. Originais, EXIF, localizações, pessoas, classificações e álbuns são preservados. As coordenadas faciais, pontuações e análises continuam a descrever o original. Os downloads originais não mudam.",
+    "setup": "Ative FACET_DARKTABLE_EDIT=1, instale darktable e ExifTool no computador do servidor e reinicie o Facet.",
+    "open": "Abrir darktable",
+    "apply": "Aplicar edição guardada",
+    "revert": "Restaurar original",
+    "download": "Descarregar JPEG XL editado",
+    "original": "Original",
+    "edited": "Editada",
+    "badge": "Editada no darktable",
+    "watching": "A aguardar que o darktable guarde a sua edição…",
+    "current_edit": "Edição atual",
+    "details": "O que não muda",
+    "applied": "Edição aplicada. O original é mantido.",
+    "reverted": "Reposto o original.",
+    "compare": "Comparar original e editada",
+    "compare_hint": "Desloque para ampliar, arraste para mover. As duas fotos movem-se em conjunto. Duplo clique para repor.",
+    "close": "Fechar",
+    "failed": "A operação falhou. Recarregue o estado antes de tentar novamente.",
+    "failed_open": "Não foi possível abrir o darktable. Recarregue o estado e tente novamente.",
+    "failed_apply": "Não foi possível aplicar a edição; a imagem anterior não mudou. Guarde novamente no darktable ou recarregue e repita.",
+    "failed_revert": "Não foi possível repor o original. Recarregue o estado e tente novamente.",
+    "failed_download": "Não foi possível transferir a imagem editada. Tente novamente.",
+    "reload": "Recarregar estado"
   }
 }

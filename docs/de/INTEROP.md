@@ -207,6 +207,21 @@ cp "$INPUT" "$OUTPUT"
 
 ## darktable
 
+### Bearbeitungen vom Desktop übernehmen (experimentell)
+
+Aktivieren Sie FACET_DARKTABLE_EDIT=1, installieren Sie darktable und ExifTool auf dem Server-Rechner und starten Sie Facet neu.
+
+Öffnen und bearbeiten Sie das Foto in darktable. Facet übernimmt die Bearbeitung automatisch wenige Sekunden nachdem darktable die XMP-Datei gespeichert hat (Dunkelkammer verlassen oder Bild wechseln); das Original bleibt erhalten. Lassen Sie diesen Dialog beim Bearbeiten geöffnet. darktable öffnet sich auf dem Facet-Rechner.
+
+Bearbeitete Fotos tragen in der Galerie ein kleines Regler-Symbol. Mit dem Vergleichen-Symbol in der Fotoansicht sehen Sie Original und Bearbeitung nebeneinander, mit gemeinsamem Zoom. „Auf das Original zurücksetzen“ stellt die Anzeige wieder her; der Download liefert die Bearbeitung als JPEG XL (Qualität 97).
+
+Die Bearbeitung ersetzt die Anzeige im selben Galerieeintrag. Originale, EXIF, Orte, Personen, Bewertungen und Alben bleiben erhalten. Gesichtskoordinaten, Bewertungen und Suchanalysen beziehen sich weiter auf das Original. Originaldownloads bleiben unverändert.
+
+Die Originaldatei bleibt unverändert. Gesichts- und Objektmarkierungen werden auf der Bearbeitung ausgeblendet. Nur in Facet gespeicherte Anmerkungen werden nicht automatisch ins JPEG XL eingebettet. Vollständige Viewer-Datenbankexporte schließen private Renderings und Verläufe aus; inkrementelle Exporte erhalten Bearbeitungen des Ziels. Ein ersetztes, offline befindliches oder neu verknüpftes Original deaktiviert die Bearbeitung bis zur erneuten Übernahme.
+
+Limits: 512 MiB / 8 MiB XMP / 60 MP / 64 MiB / 120 s.
+
+
 Siehe [Konfiguration — Viewer](CONFIGURATION.md#viewer) (Export-Profile und -Stile `viewer.raw_processor.darktable`) und [Viewer — Download](VIEWER.md#download) (Konvertierungen `type=darktable`).
 
 darktable speichert seinen Bearbeitungsverlauf in seinem eigenen `<bild><ext>.xmp`. Facets ExifTool-Writer führt in diese Datei zusammen und erhält `darktable:history` und die Masken-Knoten. Das oben beschriebene Sidecar-Verhalten für Lightroom (Export/Import, neueste gewinnt, Tag-Vereinigung) gilt unverändert, und es gibt keine RAW-Namensabweichung: Beide verwenden `<bild><ext>.xmp`.
