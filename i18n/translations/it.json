@@ -2168,7 +2168,6 @@
     "hidden_done": "Persona ignorata",
     "unhidden_done": "Persona ripristinata",
     "hide_error": "Impossibile aggiornare la visibilità della persona",
-    "split": "Dividi in una nuova persona",
     "split_action": "Dividi ({count})",
     "split_dialog_title": "Dividi in una nuova persona",
     "split_dialog_desc": "Seleziona i volti da spostare in una nuova persona.",
@@ -4103,5 +4102,33 @@
       "scope_changed": "La selezione acquisita o le opzioni sono cambiate. Genera una nuova anteprima.",
       "changed": "Destinazioni: {targets}. Foto modificate: {photos}; assegnazioni modificate: {assignments}."
     }
+  },
+  "darktable_edit": {
+    "title": "Modifica in darktable",
+    "instructions": "Apri la foto in darktable e modificala. Quando darktable salva, Facet te lo segnala qui; non cambia nulla finché non premi Applica. L'originale viene sempre conservato.",
+    "preservation": "La versione modificata sostituisce la visualizzazione nella stessa voce. Originali, EXIF, luoghi, persone, valutazioni e album vengono conservati. Coordinate dei volti, punteggi e analisi descrivono ancora l’originale. I download originali restano invariati.",
+    "setup": "Abilita FACET_DARKTABLE_EDIT=1, installa darktable ed ExifTool sul computer del server e riavvia Facet.",
+    "open": "Apri darktable",
+    "apply": "Applica modifica salvata",
+    "revert": "Ripristina originale",
+    "download": "Scarica JPEG XL modificato",
+    "original": "Originale",
+    "edited": "Modificata",
+    "badge": "Modificata in darktable",
+    "watching": "In attesa che darktable salvi la modifica…",
+    "saved": "darktable ha salvato delle modifiche. Premi Applica per usarle.",
+    "current_edit": "Modifica attuale",
+    "details": "Cosa resta invariato",
+    "applied": "Modifica applicata. L’originale è conservato.",
+    "reverted": "Ripristinato l’originale.",
+    "compare": "Confronta originale e modificata",
+    "compare_hint": "Scorri per ingrandire, trascina per spostare. Le due foto si muovono insieme. Doppio clic per reimpostare.",
+    "close": "Chiudi",
+    "failed": "Operazione non riuscita. Ricarica lo stato prima di riprovare.",
+    "failed_open": "Impossibile aprire darktable. Ricarica lo stato e riprova.",
+    "failed_apply": "Impossibile applicare la modifica; l’immagine precedente è invariata. Salvala di nuovo in darktable, oppure ricarica e riprova.",
+    "failed_revert": "Impossibile ripristinare l’originale. Ricarica lo stato e riprova.",
+    "failed_download": "Impossibile scaricare l’immagine modificata. Riprova.",
+    "reload": "Ricarica stato"
   }
 }

@@ -207,6 +207,21 @@ cp "$INPUT" "$OUTPUT"
 
 ## darktable
 
+### Retour des modifications du bureau (expérimental)
+
+Activez FACET_DARKTABLE_EDIT=1, installez darktable et ExifTool sur l’ordinateur du serveur, puis redémarrez Facet.
+
+Ouvrez et modifiez la photo dans darktable. Quand darktable enregistre le fichier XMP (quittez la chambre noire ou changez d’image), la fenêtre vous le signale ; rien ne change tant que vous n’appuyez pas sur Appliquer. L’original est conservé. Gardez cette fenêtre ouverte pendant la retouche. darktable s’ouvre sur l’ordinateur exécutant Facet.
+
+Les photos modifiées portent une petite icône de réglages dans la galerie. L’icône de comparaison de la vue photo affiche l’original à côté de la version modifiée avec un zoom synchronisé. « Retour à l’original » rétablit l’affichage ; le téléchargement fournit la version modifiée en JPEG XL (qualité 97).
+
+L’image modifiée remplace l’affichage dans la même entrée. Les originaux, EXIF, lieux, personnes, notes et albums sont conservés. Les coordonnées des visages, scores et analyses décrivent toujours l’original. Les téléchargements originaux restent inchangés.
+
+Le fichier original sur disque reste intact. Les régions faciales et les objets ne sont pas superposés à la version modifiée. Les annotations stockées uniquement dans Facet ne sont pas intégrées automatiquement au JPEG XL. Les exports complets de la base du visualiseur excluent les rendus et historiques privés ; les exports incrémentiels conservent les modifications du destinataire. Un original remplacé, hors ligne ou relié à un autre chemin rend le rendu inactif jusqu’à une nouvelle application.
+
+Limits: 512 MiB / 8 MiB XMP / 60 MP / 64 MiB / 120 s.
+
+
 Voir [Configuration — Visionneuse](CONFIGURATION.md#visionneuse) (profils et styles d'export `viewer.raw_processor.darktable`) et [Visionneuse — Téléchargement](VIEWER.md#points-daccès-api) (conversions `type=darktable`).
 
 darktable stocke son historique de retouches dans son propre `<image><ext>.xmp`. L'écriveur ExifTool de Facet fusionne dans ce fichier et conserve les nœuds `darktable:history` et de masques. Le comportement de sidecar décrit plus haut pour Lightroom (export/import, le plus récent gagne, union des tags) s'applique tel quel, et il n'y a aucune incohérence de nommage RAW : les deux utilisent `<image><ext>.xmp`.

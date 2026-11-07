@@ -33,6 +33,11 @@ function photos(n: number): Photo[] {
 }
 
 describe('aspectOf', () => {
+  it('uses edited display geometry without changing original detector dimensions', () => {
+    const cropped = { ...photo(0, 1600, 1200), display_aspect: 2 / 3 };
+    expect(aspectOf(cropped)).toBe(2 / 3);
+    expect(cropped.image_width).toBe(1600);
+  });
   it('prefers the recorded pixel dimensions', () => {
     expect(aspectOf(photo(0, 1600, 1200))).toBeCloseTo(4 / 3, 6);
   });

@@ -2193,7 +2193,6 @@
     "hidden_done": "Person ignored",
     "unhidden_done": "Person restored",
     "hide_error": "Failed to update person visibility",
-    "split": "Split into new person",
     "split_action": "Split ({count})",
     "split_dialog_title": "Split into new person",
     "split_dialog_desc": "Select the faces to move into a new person.",
@@ -4103,5 +4102,33 @@
       "scope_changed": "The captured selection or options changed. Preview again.",
       "changed": "Targets: {targets}. Photos changed: {photos}; assignments changed: {assignments}."
     }
+  },
+  "darktable_edit": {
+    "title": "Edit in darktable",
+    "instructions": "Open the photo in darktable and edit it. When darktable saves, Facet tells you here; nothing changes until you press Apply. The original is always kept.",
+    "preservation": "The edited image replaces the display in the same gallery entry. Originals, EXIF, location, people, ratings and albums are retained. Face coordinates, scores and search analysis still describe the original. Original downloads remain unchanged.",
+    "setup": "Enable FACET_DARKTABLE_EDIT=1 and install darktable and ExifTool on the viewer computer, then restart Facet.",
+    "open": "Open darktable",
+    "apply": "Apply saved edit",
+    "revert": "Revert to original",
+    "download": "Download edited JPEG XL",
+    "original": "Original",
+    "edited": "Edited",
+    "badge": "Edited in darktable",
+    "watching": "Waiting for darktable to save your edit…",
+    "saved": "darktable saved changes. Press Apply to use them.",
+    "current_edit": "Current edit",
+    "details": "What stays unchanged",
+    "applied": "Edit applied. The original is kept.",
+    "reverted": "Reverted to the original.",
+    "compare": "Compare original and edited",
+    "compare_hint": "Scroll to zoom, drag to pan. Both photos move together. Double-click to reset.",
+    "close": "Close",
+    "failed": "The operation failed. Reload the edit status before trying again.",
+    "failed_open": "Could not open darktable. Reload the status and try again.",
+    "failed_apply": "Could not apply the edit; the previous image is unchanged. Save it again in darktable, or reload and retry.",
+    "failed_revert": "Could not revert to the original. Reload the status and try again.",
+    "failed_download": "Could not download the edited image. Try again.",
+    "reload": "Reload status"
   }
 }

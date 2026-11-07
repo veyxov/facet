@@ -2168,7 +2168,6 @@
     "hidden_done": "Person ignoriert",
     "unhidden_done": "Person wiederhergestellt",
     "hide_error": "Sichtbarkeit der Person konnte nicht aktualisiert werden",
-    "split": "In neue Person aufteilen",
     "split_action": "Aufteilen ({count})",
     "split_dialog_title": "In neue Person aufteilen",
     "split_dialog_desc": "Wählen Sie die Gesichter aus, die in eine neue Person verschoben werden sollen.",
@@ -4103,5 +4102,33 @@
       "scope_changed": "Die erfasste Auswahl oder Optionen haben sich geändert. Erstellen Sie eine neue Vorschau.",
       "changed": "Ziele: {targets}. Geänderte Fotos: {photos}; geänderte Zuweisungen: {assignments}."
     }
+  },
+  "darktable_edit": {
+    "title": "In darktable bearbeiten",
+    "instructions": "Öffne das Foto in darktable und bearbeite es. Wenn darktable speichert, meldet Facet das hier; erst mit „Anwenden“ ändert sich etwas. Das Original bleibt immer erhalten.",
+    "preservation": "Die Bearbeitung ersetzt die Anzeige im selben Galerieeintrag. Originale, EXIF, Orte, Personen, Bewertungen und Alben bleiben erhalten. Gesichtskoordinaten, Bewertungen und Suchanalysen beziehen sich weiter auf das Original. Originaldownloads bleiben unverändert.",
+    "setup": "Aktivieren Sie FACET_DARKTABLE_EDIT=1, installieren Sie darktable und ExifTool auf dem Server-Rechner und starten Sie Facet neu.",
+    "open": "darktable öffnen",
+    "apply": "Bearbeitung übernehmen",
+    "revert": "Original wiederherstellen",
+    "download": "Bearbeitetes JPEG XL herunterladen",
+    "original": "Original",
+    "edited": "Bearbeitet",
+    "badge": "In darktable bearbeitet",
+    "watching": "Warte darauf, dass darktable Ihre Bearbeitung speichert …",
+    "saved": "darktable hat Änderungen gespeichert. Zum Übernehmen „Anwenden“ drücken.",
+    "current_edit": "Aktuelle Bearbeitung",
+    "details": "Was unverändert bleibt",
+    "applied": "Bearbeitung übernommen. Das Original bleibt erhalten.",
+    "reverted": "Auf das Original zurückgesetzt.",
+    "compare": "Original und Bearbeitung vergleichen",
+    "compare_hint": "Scrollen zum Zoomen, Ziehen zum Verschieben. Beide Fotos bewegen sich gemeinsam. Doppelklick setzt zurück.",
+    "close": "Schließen",
+    "failed": "Vorgang fehlgeschlagen. Laden Sie vor einem erneuten Versuch den Status neu.",
+    "failed_open": "darktable konnte nicht geöffnet werden. Status neu laden und erneut versuchen.",
+    "failed_apply": "Die Bearbeitung konnte nicht übernommen werden; das bisherige Bild bleibt unverändert. In darktable erneut speichern oder neu laden und wiederholen.",
+    "failed_revert": "Das Zurücksetzen auf das Original ist fehlgeschlagen. Status neu laden und erneut versuchen.",
+    "failed_download": "Das bearbeitete Bild konnte nicht heruntergeladen werden. Erneut versuchen.",
+    "reload": "Status neu laden"
   }
 }

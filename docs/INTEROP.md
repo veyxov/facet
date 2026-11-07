@@ -207,6 +207,55 @@ cp "$INPUT" "$OUTPUT"
 
 ## darktable
 
+### Experimental desktop edit return
+
+Enable `FACET_DARKTABLE_EDIT=1` when starting the viewer. Install darktable and
+ExifTool on that same computer; macOS installations in `/Applications/darktable.app`
+are detected automatically. `FACET_DARKTABLE_GUI` and `FACET_DARKTABLE_CLI` can name
+other executables. This desktop workflow launches darktable on the **server computer**;
+it does not embed darktable in the browser or open it on a remote browser's computer.
+Edition access is required for every editor action and the edited-image download. Anyone who can see a photo sees its edited display.
+
+Open a photo's **Edit in darktable** dialog, choose **Open darktable**, make your
+adjustments; when darktable saves its XMP sidecar (leave the darkroom or switch image)
+the dialog tells you so. Nothing changes until you press **Apply saved edit**, which renders
+the edit and closes the dialog. Facet watches the sidecar's content, not its timestamp, and
+ignores the sidecar darktable creates when it first opens a photo that had none. The dialog
+watches one round of edits: reopen it for the next. The edited image
+replaces the display in the same gallery entry, without a rescan.
+
+Edited photos show a small `photo_filter` badge on gallery cards, and the photo view gets a
+**compare** button that opens the original beside the edit in synced pan/zoom panes (the
+original is requested with `original=1` on `/image` and `/thumbnail`). **Download edited JPEG XL** returns the rendition (JPEG XL, quality 97, about two thirds the size of a quality-96 JPEG);
+the ordinary original-download action still returns the original. **Revert to original**
+restores the original display. Reopening darktable continues from its saved sidecar.
+
+Original image bytes, EXIF, GPS, captions, tags, face identities, manual regions,
+ratings, albums and stack membership are retained. The file on disk is not replaced.
+The experiment stores the JPEG XL master, a full-size JPEG fallback (browsers that advertise `image/jxl` are served the master directly), a 1920px preview, a 640px thumbnail and a copy of the applied XMP
+history per photo in the library database; large collections of edits increase database
+and backup size. Full viewer database exports omit these private records; incremental
+exports preserve edits made in the destination but do not transfer source edits.
+
+Crop and rotation change display geometry. Facet uses the rendition's aspect ratio,
+and suppresses original-space face/object overlays on it. People, manual-region editors,
+scores and search embeddings continue to describe the original, including people cropped
+out of the rendition. This version does not recompute AI analysis or transform face boxes.
+The edited JPEG XL copies source EXIF/IPTC/XMP, normalizes orientation/dimensions and removes
+obsolete embedded previews and face-region coordinates. Database-only annotations remain
+in Facet; they are not automatically embedded into the edited JPEG XL.
+
+Apply snapshots the original and saved XMP into a private temporary directory, renders
+with darktable-cli, then publishes the result in one SQLite transaction. A rendering
+failure, source change, stale revision or lost photo access leaves the previous display
+unchanged. Reload the dialog's status after an error before retrying; reloading never
+replays a write. A later source replacement, missing/offline source, or path relink makes
+the saved rendition inactive until explicitly reapplied; its stored receipt is retained.
+Supported experimental limits are 512 MiB input, 8 MiB XMP, 60 million output pixels and
+64 MiB rendered image. Rendering admits one return per viewer process and each external
+command has a 120-second timeout. Temporary snapshots are removed on success and failure.
+
+
 See [Configuration — Viewer](CONFIGURATION.md#viewer) (`viewer.raw_processor.darktable` export profiles and styles) and [Viewer — Download](VIEWER.md#download) (`type=darktable` conversions).
 
 darktable stores its edit history in its own `<image><ext>.xmp`. Facet's ExifTool writer merges into that file and keeps the `darktable:history` and mask nodes. The Lightroom sidecar behaviour above (export/import, newest-wins, tag union) applies as-is, and there is no RAW naming mismatch: both use `<image><ext>.xmp`.

@@ -1227,8 +1227,23 @@ def _migrate_add_missing_columns(conn, table_name, columns):
 # on the others would have been created on fresh DBs but never on existing ones.
 # Virtual tables (photos_fts, photos_vec) are excluded: they are recreated, not
 # ALTERed. Order mirrors the CREATE TABLE order in init_database.
+PHOTO_DARKTABLE_EDITS_COLUMNS = [
+    ('photo_path', 'TEXT PRIMARY KEY REFERENCES photos(path) ON DELETE CASCADE ON UPDATE CASCADE'),
+    ('revision', 'TEXT NOT NULL'),
+    ('source', 'TEXT NOT NULL'),
+    ('jpeg', 'BLOB NOT NULL'),
+    ('jxl', 'BLOB'),
+    ('preview', 'BLOB NOT NULL'),
+    ('thumbnail', 'BLOB NOT NULL'),
+    ('history', 'BLOB NOT NULL'),
+    ('width', 'INTEGER NOT NULL'),
+    ('height', 'INTEGER NOT NULL'),
+]
+
+
 _MIGRATED_TABLES = [
     ('photos', PHOTOS_COLUMNS),
+    ('photo_darktable_edits', PHOTO_DARKTABLE_EDITS_COLUMNS),
     ('faces', FACES_COLUMNS),
     ('manual_face_deletions', MANUAL_FACE_DELETIONS_COLUMNS),
     ('ignored_face_detections', IGNORED_FACE_DETECTIONS_COLUMNS),
@@ -1441,6 +1456,8 @@ def init_database(db_path='photo_scores_pro.db', build_photo_indexes=True):
         from db.logical_review_sync import init_receipts as init_logical_review_receipts
         init_logical_review(conn)
         init_logical_review_receipts(conn)
+
+        conn.execute(_build_create_table_sql('photo_darktable_edits', PHOTO_DARKTABLE_EDITS_COLUMNS))
 
         # Create faces table with unique constraint
         conn.execute(_build_create_table_sql(

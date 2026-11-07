@@ -108,6 +108,7 @@ export interface Photo {
    *  though the resolution did not. Null whenever the dimensions are real —
    *  it is a fallback, never a preference. */
   image_aspect?: number | null;
+  display_aspect?: number | null;
   // Owner-private manual stack enrichment (absent on public shares).
   stack_id?: string | null;
   stack_revision?: number | null;

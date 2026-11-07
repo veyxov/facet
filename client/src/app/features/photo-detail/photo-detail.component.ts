@@ -158,7 +158,18 @@ const SOCIAL_SOURCE_KEYS: Record<string, string> = {
           </button>
         }
 
+        @if (p.display_aspect) {
+          <button mat-icon-button class="max-sm:!h-11 max-sm:!w-11 pointer-coarse:!h-11 pointer-coarse:!w-11" (click)="compareVersions(p)"
+            [matTooltip]="I18N.darktable_edit.compare | translate" [attr.aria-label]="I18N.darktable_edit.compare | translate">
+            <mat-icon>compare</mat-icon>
+          </button>
+        }
+
         @if (auth.isEdition()) {
+          <button mat-icon-button class="max-sm:!h-11 max-sm:!w-11 pointer-coarse:!h-11 pointer-coarse:!w-11" (click)="editInDarktable(p)"
+            [matTooltip]="I18N.darktable_edit.title | translate" [attr.aria-label]="I18N.darktable_edit.title | translate">
+            <mat-icon [class.!text-[var(--mat-sys-primary)]]="!!p.display_aspect">{{ p.display_aspect ? 'photo_filter' : 'edit' }}</mat-icon>
+          </button>
           <button mat-icon-button class="max-sm:!h-11 max-sm:!w-11 pointer-coarse:!h-11 pointer-coarse:!w-11 max-md:!hidden" [matMenuTriggerFor]="categoryOverrideMenu"
             [matTooltip]="I18N.photo.category_override.menu_tooltip | translate" [attr.aria-label]="I18N.photo.category_override.menu_tooltip | translate">
             <mat-icon>category</mat-icon>
@@ -334,6 +345,15 @@ const SOCIAL_SOURCE_KEYS: Record<string, string> = {
                 (pointerdown)="$event.stopPropagation()" (dblclick)="$event.stopPropagation()" (click)="stepCollectionPhoto(1); $event.stopPropagation()"><mat-icon aria-hidden="true">chevron_right</mat-icon></button>
             </div>
           }
+          @if (p.display_aspect) {
+            <button type="button" (click)="compareVersions(p)" (pointerdown)="$event.stopPropagation()" (dblclick)="$event.stopPropagation()"
+              class="absolute right-2 top-2 z-30 inline-flex min-h-8 cursor-pointer items-center gap-1 rounded-full bg-black/60 px-3 text-xs text-white hover:bg-black/80 focus-visible:outline-2 focus-visible:outline-white pointer-coarse:min-h-11"
+              [attr.aria-label]="I18N.darktable_edit.compare | translate">
+              <mat-icon class="!h-4 !w-4 !text-base !leading-4" aria-hidden="true">photo_filter</mat-icon>
+              <span>{{ I18N.darktable_edit.edited | translate }}</span>
+            </button>
+          }
+          @if (!p.display_aspect) {
           <app-photo-face-layer
             [path]="p.path"
             [imageWidth]="p.image_width"
@@ -350,6 +370,7 @@ const SOCIAL_SOURCE_KEYS: Record<string, string> = {
             [imageHeight]="p.image_height"
             [transform]="zoom.transform()"
             [revision]="objectsRevision()" />
+          }
         </div>
           <div class="shrink-0 border-t border-[var(--facet-image-rule)] bg-[var(--facet-image-chrome)] px-4 py-1 text-[var(--facet-image-ink)] cursor-auto" role="presentation" (pointerdown)="$event.stopPropagation()" (dblclick)="$event.stopPropagation()">
             <app-rendition-readout [state]="displayedRendition()" [pending]="sourceRendition().phase === 'loading'" [attemptFailed]="sourceRendition().phase === 'failed'" [failureLabel]="I18N.photo_detail.rendition.source_failed" [scale]="zoom.scale()" [minimumScale]="1" [maximumScale]="zoom.maximumScale" (zoomStep)="zoom.zoomStep($event)" (fit)="zoom.reset()" (retry)="retryFullImage()" />
@@ -686,6 +707,42 @@ const SOCIAL_SOURCE_KEYS: Record<string, string> = {
   host: { class: 'flex flex-col h-full overflow-y-auto lg:overflow-y-hidden' },
 })
 export class PhotoDetailComponent extends PhotoDetailBase implements OnInit {
+  protected async compareVersions(p: Photo): Promise<void> {
+    const { DarktableCompareDialogComponent } = await import('./darktable-compare-dialog.component');
+    this.dialog.open(DarktableCompareDialogComponent, {
+      data: { photo: p },
+      width: '96vw', height: '92vh', maxWidth: '96vw', autoFocus: false,
+    });
+  }
+
+  protected async editInDarktable(p: Photo): Promise<void> {
+    const identity = this.auth.identity();
+    let navigated = false;
+    const { DarktableEditDialogComponent } = await import('./darktable-edit-dialog.component');
+    const ref = this.dialog.open(DarktableEditDialogComponent, { data: { path: p.path }, maxWidth: '95vw' });
+    const navigation = this.router.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(event => {
+      if (event instanceof NavigationStart) {
+        navigated = true;
+        ref.close();
+      }
+    });
+    const current = () => !navigated && !this.destroyRef.destroyed && this.auth.isEdition()
+      && this.auth.identity() === identity && this.photo()?.path === p.path;
+    ref.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(async changed => {
+      try {
+        if (!changed || !current()) return;
+        const photo = await this.fetchPhoto(p.path).catch(() => null);
+        if (photo && current()) {
+          this.snackBar.open(this.i18n.t(changed === 'revert' ? this.I18N.darktable_edit.reverted : this.I18N.darktable_edit.applied), '', { duration: 4000 });
+          this.photo.set(photo);
+          this.store.patchPhoto(p.path, photo);
+        }
+      } finally {
+        navigation.unsubscribe();
+      }
+    });
+  }
+
   protected readonly I18N = i18nKeys();
   protected readonly analysisOpen = signal(false);
   protected readonly aggregateRange = computed(() => {

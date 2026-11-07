@@ -172,6 +172,8 @@ All notable changes to Facet are documented in this file.
 
 - Escape on a directly opened photo returns to the saved gallery query instead of leaving the application through browser history. Gallery-opened photos retain normal history return.
 
+- Experimental desktop darktable edit return (`FACET_DARKTABLE_EDIT=1`): edit a photo in darktable and Facet applies the result automatically once darktable saves its XMP sidecar, replacing the display in the existing photo entry without rescanning or rewriting originals. Exported as JPEG XL (quality 97) with a JPEG fallback for browsers that cannot show it; edited photos get a gallery badge and an original-versus-edit compare view, and **Revert to original** undoes it. Original metadata and face identities remain intact; analysis stays tied to the original.
+
 ### Security
 
 - **Request bodies are capped at 10 MB before any handler reads them.** Login, proofing sessions and client error reports buffered the whole body before validation and rate limiting ran, so an unbounded body was a memory lever for any LAN peer. A declared size over the cap answers 413 at once and a chunked body is refused as soon as it crosses it. WebDAV uploads, the AI-edit import and the Lightroom state import keep their own, larger streaming caps.

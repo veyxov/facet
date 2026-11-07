@@ -257,6 +257,16 @@ describe('PhotoCardComponent', () => {
     expect(fixture.nativeElement.querySelector('button[aria-label="photoCard.stack_set"]')).not.toBeNull();
   });
 
+  it('marks a darktable-edited photo with a photo_filter badge, and an unedited one with none', () => {
+    fixture.componentInstance.photo.set(makePhoto({ display_aspect: 1.5 }));
+    fixture.detectChanges();
+    const badge = fixture.nativeElement.querySelector('[aria-label="darktable_edit.badge"]') as HTMLElement;
+    expect(badge?.querySelector('mat-icon')?.textContent?.trim()).toBe('photo_filter');
+    fixture.componentInstance.photo.set(makePhoto({}));
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('[aria-label="darktable_edit.badge"]')).toBeNull();
+  });
+
   it('marks an AI edit with the ✨ badge, and nothing else', () => {
     fixture.componentInstance.photo.set(makePhoto({ ai_edit_of: '/photos/original.jpg' }));
     fixture.detectChanges();

@@ -3339,6 +3339,91 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/photo/darktable": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** State */
+        get: operations["state_api_photo_darktable_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/photo/darktable/apply": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Apply Edit */
+        post: operations["apply_edit_api_photo_darktable_apply_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/photo/darktable/download": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Download Edit */
+        get: operations["download_edit_api_photo_darktable_download_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/photo/darktable/open": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Open Editor */
+        post: operations["open_editor_api_photo_darktable_open_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/photo/darktable/revert": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Revert Edit */
+        post: operations["revert_edit_api_photo_darktable_revert_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/photo/delete": {
         parameters: {
             query?: never;
@@ -5855,6 +5940,10 @@ export interface paths {
          *     convert. The loupe in Scenes/Culling uses this so it degrades to the embedded
          *     thumbnail rather than going blank.
          *
+         *     A photo with a current darktable edit is served as the edit (the JPEG XL
+         *     master to a client that accepts ``image/jxl``, a JPEG otherwise);
+         *     ``original=1`` skips it and serves the photo itself.
+         *
          *     ``sequence_kind`` rides along on the visibility query rather than costing a
          *     second round trip: it selects how a RAW renders (see
          *     ``utils.image_loading.renders_faithfully``).
@@ -5964,6 +6053,9 @@ export interface paths {
         /**
          * Get Thumbnail
          * @description Get photo thumbnail.
+         *
+         *     A photo with a current darktable edit is served as the edit; ``original=1``
+         *     asks for the photo's own stored thumbnail instead.
          *
          *     A ``size`` above 640 is rendered from the original at up to 1920 px. If that
          *     fails, or the render has no signal, the stored thumbnail is served with a
@@ -7343,6 +7435,26 @@ export interface components {
              * @default []
              */
             options?: components["schemas"]["DownloadOption"][];
+        };
+        /** EditRequest */
+        EditRequest: {
+            /** Path */
+            path: string;
+            /** Token */
+            token: string;
+        };
+        /** EditState */
+        EditState: {
+            /** Available */
+            available: boolean;
+            /** Edited */
+            edited: boolean;
+            /** Enabled */
+            enabled: boolean;
+            /** Sidecar */
+            sidecar?: string | null;
+            /** Token */
+            token: string;
         };
         /** EditionLoginRequest */
         EditionLoginRequest: {
@@ -9332,6 +9444,8 @@ export interface components {
             date_taken?: string | null;
             /** Deqa Score */
             deqa_score?: number | null;
+            /** Display Aspect */
+            display_aspect?: number | null;
             /** Dominant Hue */
             dominant_hue?: number | null;
             /** Duplicate Group Id */
@@ -10800,6 +10914,8 @@ export interface components {
             date_taken?: string | null;
             /** Deqa Score */
             deqa_score?: number | null;
+            /** Display Aspect */
+            display_aspect?: number | null;
             /** Dominant Hue */
             dominant_hue?: number | null;
             /** Duplicate Group Id */
@@ -16984,6 +17100,167 @@ export interface operations {
             };
         };
     };
+    state_api_photo_darktable_get: {
+        parameters: {
+            query: {
+                path: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EditState"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    apply_edit_api_photo_darktable_apply_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EditRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EditState"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    download_edit_api_photo_darktable_download_get: {
+        parameters: {
+            query: {
+                path: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    open_editor_api_photo_darktable_open_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EditRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EditState"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    revert_edit_api_photo_darktable_revert_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EditRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EditState"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     api_photo_delete_api_photo_delete_post: {
         parameters: {
             query?: never;
@@ -20852,6 +21129,7 @@ export interface operations {
             query: {
                 path: string;
                 fallback?: string;
+                original?: boolean;
             };
             header?: never;
             path?: never;
@@ -20955,6 +21233,7 @@ export interface operations {
             query: {
                 path: string;
                 size?: number | null;
+                original?: boolean;
             };
             header?: never;
             path?: never;
