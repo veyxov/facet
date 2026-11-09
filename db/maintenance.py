@@ -1072,7 +1072,7 @@ def _incremental_update_viewer_data(source_db, output_path, thumbnail_size, verb
 
 
 # Tables a viewer database export must not carry (the DROP list of the full export).
-VIEWER_EXPORT_EXCLUDED_TABLES = ('logical_review_imports', 'logical_asset_imports', 'mcp_tokens', 'rating_provenance', 'organization_history',
+VIEWER_EXPORT_EXCLUDED_TABLES = ('photo_darktable_edits', 'logical_review_imports', 'logical_asset_imports', 'mcp_tokens', 'rating_provenance', 'organization_history',
                                  'face_review_feedback',
                                  'face_update_items', 'face_update_jobs',
                                  'person_centroid_dirty',

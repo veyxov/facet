@@ -52,6 +52,7 @@ class PhotoMetadata(BaseModel):
     ``similarity``, which stays the blended embedding/FTS value.
     """
 
+    display_aspect: Optional[float] = None
     preview_revision: Optional[str] = None
     # The original this photo was made from, when it is a recorded AI edit (photo_ai_edits).
     ai_edit_of: Optional[str] = None

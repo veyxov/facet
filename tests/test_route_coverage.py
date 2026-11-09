@@ -110,6 +110,8 @@ PARAMETERISED_ROUTES = [
     ('/api/export/sidecar_jobs/not-a-job', {}),
     ('/api/search', {'q': 'test', 'limit': 10}),
     ('/api/photo', {'path': '/nonexistent.jpg'}),
+    ('/api/photo/darktable', {'path': '/nonexistent.jpg'}),
+    ('/api/photo/darktable/download', {'path': '/nonexistent.jpg'}),
     ('/api/critique', {'path': '/nonexistent.jpg'}),
     ('/api/caption', {'path': '/nonexistent.jpg'}),
     ('/api/photo/faces', {'path': '/nonexistent.jpg'}),

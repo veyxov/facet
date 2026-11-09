@@ -90,14 +90,14 @@ def _cached_image_response(image_bytes: bytes, request: Request,
     )
 
 
-def _private_crop_response(image_bytes: bytes, request: Request) -> Response:
+def _private_crop_response(image_bytes: bytes, request: Request, media_type: str = 'image/jpeg') -> Response:
     """Revalidate mutable private crops only after the caller's visibility check."""
     etag = hashlib.md5(image_bytes).hexdigest()
     headers = {'Cache-Control': 'private, no-cache, must-revalidate',
-               'Vary': 'Authorization, Cookie', 'ETag': etag}
+               'Vary': 'Accept, Authorization, Cookie', 'ETag': etag}
     if request.headers.get('if-none-match') == etag:
         return Response(status_code=304, headers=headers)
-    return Response(content=image_bytes, media_type='image/jpeg', headers=headers)
+    return Response(content=image_bytes, media_type=media_type, headers=headers)
 
 
 def _get_image_jpeg_quality() -> int:
@@ -324,9 +324,13 @@ def get_thumbnail(
     request: Request,
     path: str = Query(...),
     size: Optional[int] = Query(None),
+    original: bool = Query(False),
     user: Optional[CurrentUser] = Depends(get_optional_user),
 ):
     """Get photo thumbnail.
+
+    A photo with a current darktable edit is served as the edit; ``original=1``
+    asks for the photo's own stored thumbnail instead.
 
     A ``size`` above 640 is rendered from the original at up to 1920 px. If that
     fails, or the render has no signal, the stored thumbnail is served with a
@@ -339,10 +343,18 @@ def get_thumbnail(
             [path, *vis_params],
         ).fetchone()
 
-    return _thumbnail_response(request, path, size, row)
+    return _thumbnail_response(request, path, size, row, original)
 
 
-def _thumbnail_response(request: Request, path: str, size: Optional[int], row):
+def _thumbnail_response(request: Request, path: str, size: Optional[int], row, original: bool = False):
+    if row and not original:
+        from api.darktable_edits import rendition
+        edited = rendition(path, 640 if not size or size <= 640 else 1920)
+        if edited:
+            if size and 0 < size < 640:
+                edited = _do_resize(edited, size)
+            return _private_crop_response(edited, request)
+
     if not (row and row['thumbnail']):
         return Response(content="Thumbnail not found", status_code=404)
     if size and 0 < size < _STORED_THUMBNAIL_SIZE:
@@ -512,6 +524,7 @@ def image(
     request: Request,
     path: str = Query(...),
     fallback: str = Query(""),
+    original: bool = Query(False),
     user: Optional[CurrentUser] = Depends(get_optional_user),
 ):
     """Serve full-size image file (RAW/HEIF converted to JPEG for the browser).
@@ -520,6 +533,10 @@ def image(
     404/500 when the original is unavailable (e.g. an offline volume) or fails to
     convert. The loupe in Scenes/Culling uses this so it degrades to the embedded
     thumbnail rather than going blank.
+
+    A photo with a current darktable edit is served as the edit (the JPEG XL
+    master to a client that accepts ``image/jxl``, a JPEG otherwise);
+    ``original=1`` skips it and serves the photo itself.
 
     ``sequence_kind`` rides along on the visibility query rather than costing a
     second round trip: it selects how a RAW renders (see
@@ -531,12 +548,21 @@ def image(
             f"SELECT path, sequence_kind, preview_revision FROM photos WHERE path = ? AND {vis_sql}",
             [path, *vis_params],
         ).fetchone()
-    return _image_response(request, path, fallback, row)
+    return _image_response(request, path, fallback, row, original)
 
 
-def _image_response(request: Request, path: str, fallback: str, row):
+def _image_response(request: Request, path: str, fallback: str, row, original: bool = False):
     if not row:
         return Response(content="Not found", status_code=404)
+
+    from api.darktable_edits import rendition
+    if not original and _accepts_jpegxl(request.headers.get('accept', '')):
+        master = rendition(path, jxl=True)
+        if master:
+            return _private_crop_response(master, request, 'image/jxl')
+    edited = None if original else rendition(path)
+    if edited:
+        return _private_crop_response(edited, request)
 
     want_fallback = fallback == "thumbnail"
     is_jxl = Path(row['path']).suffix.lower() in KNOWN_JXL_EXTENSIONS

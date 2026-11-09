@@ -207,6 +207,21 @@ cp "$INPUT" "$OUTPUT"
 
 ## darktable
 
+### Regresso das edições do ambiente de trabalho (experimental)
+
+Ative FACET_DARKTABLE_EDIT=1, instale darktable e ExifTool no computador do servidor e reinicie o Facet.
+
+Abra e edite a foto no darktable. Quando o darktable guarda o ficheiro XMP (saia da câmara escura ou mude de imagem), a janela avisa; nada muda até premir Aplicar. O original é mantido. Mantenha esta janela aberta enquanto edita. O darktable abre no computador que executa o Facet.
+
+As fotos editadas mostram um pequeno ícone de ajustes na galeria. O ícone de comparar na vista da foto mostra o original ao lado da edição com zoom sincronizado. «Repor o original» restaura a imagem; a transferência entrega a edição em JPEG XL (qualidade 90). O histórico fica em `<ficheiro>.xmp` junto ao original; copie-o com a foto para continuar noutro computador. «Transferir passos de edição (.xmp)» entrega a cópia guardada pelo Facet. A restauração neural do darktable (redução de ruído, ampliação) grava um **ficheiro novo** (`<nome>_01.tif`, ou um DNG na redução de ruído RAW) junto ao original em vez de o alterar. A janela lista esses ficheiros; «Usar <ficheiro> como edição» renderiza-o como edição e mantém o original.
+
+A edição substitui a imagem apresentada na mesma entrada. Originais, EXIF, localizações, pessoas, classificações e álbuns são preservados. As coordenadas faciais, pontuações e análises continuam a descrever o original. Os downloads originais não mudam.
+
+O ficheiro original permanece intacto. As regiões faciais e os objetos não são sobrepostos à edição. As anotações guardadas apenas no Facet não são incorporadas automaticamente no JPEG XL. As exportações completas da base excluem imagens e históricos privados; as incrementais preservam as edições do destino. Um original substituído, offline ou religado desativa a edição até ser aplicada novamente.
+
+Limits: 512 MiB / 8 MiB XMP / 60 MP / 64 MiB / 120 s.
+
+
 Veja [Configuração — Viewer](CONFIGURATION.md#viewer) (perfis e estilos de exportação `viewer.raw_processor.darktable`) e [Visualizador — Download](VIEWER.md#endpoints-da-api) (conversões `type=darktable`).
 
 O darktable salva seu histórico de edições em seu próprio `<image><ext>.xmp`. O gravador do Facet com ExifTool mescla nesse arquivo e preserva os nós `darktable:history` e de máscaras. O comportamento de sidecar do Lightroom descrito acima (exportar/importar, o mais recente vence, união de tags) se aplica sem mudanças, e não há divergência de nome RAW: ambos usam `<image><ext>.xmp`.

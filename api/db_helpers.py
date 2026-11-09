@@ -1406,6 +1406,9 @@ async def attach_person_data_async(photos, conn):
             photo['persons'] = []
             photo['unassigned_faces'] = 0
 
+    from api.darktable_edits import attach_display_aspects
+    await attach_display_aspects(photos, conn)
+
 
 # --- MULTI-USER VISIBILITY & PREFERENCES ---
 
