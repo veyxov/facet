@@ -3,6 +3,7 @@ from datetime import timedelta
 import logging
 import os
 import subprocess
+import sys
 import threading
 
 from fastapi import APIRouter, Depends, HTTPException, Response
@@ -97,7 +98,11 @@ def open_editor(body: EditRequest, user: CurrentUser = Depends(require_edition))
     if not gui or not cli or not exiftool:
         raise HTTPException(503, 'Install darktable and ExifTool on the viewer computer')
     try:
-        process = subprocess.Popen([gui, disk], stdin=subprocess.DEVNULL,
+        # Starting the binary again while darktable runs fails with "database is locked";
+        # LaunchServices hands the file to the running instance instead.
+        bundle = gui.split('.app/', 1)[0] + '.app' if '.app/' in gui else None
+        command = ['open', '-a', bundle, disk] if bundle and sys.platform == 'darwin' else [gui, disk]
+        process = subprocess.Popen(command, stdin=subprocess.DEVNULL,
                                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         # Reap a forwarding process without waiting for the desktop editor to exit.
         threading.Thread(target=process.wait, daemon=True).start()
