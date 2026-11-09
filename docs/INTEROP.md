@@ -226,9 +226,9 @@ replaces the display in the same gallery entry, without a rescan.
 
 Edited photos show a small `photo_filter` badge on gallery cards, and the photo view gets a
 **compare** button that opens the original beside the edit in synced pan/zoom panes (the
-original is requested with `original=1` on `/image` and `/thumbnail`). **Download edited JPEG XL** returns the rendition (JPEG XL, quality 97, about two thirds the size of a quality-96 JPEG);
+original is requested with `original=1` on `/image` and `/thumbnail`). **Download edited JPEG XL** returns the rendition (JPEG XL, quality 90, visually lossless at about half the size of quality 97);
 the ordinary original-download action still returns the original. **Revert to original**
-restores the original display. Reopening darktable continues from its saved sidecar.
+restores the original display. Reopening darktable continues from its saved sidecar, which lives next to the original as `<file>.xmp` and is never deleted; copy it with the photo to another computer to keep editing. **Download edit steps (.xmp)** returns the copy Facet stored when you applied, as a backup.
 
 Original image bytes, EXIF, GPS, captions, tags, face identities, manual regions,
 ratings, albums and stack membership are retained. The file on disk is not replaced.

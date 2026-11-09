@@ -76,6 +76,7 @@ interface EditState {
             </div>
             <div class="flex flex-wrap gap-2">
               <button mat-button (click)="download()" [disabled]="busy() || error()">{{ I18N.darktable_edit.download | translate }}</button>
+              <button mat-button (click)="download('steps')" [disabled]="busy() || error()">{{ I18N.darktable_edit.download_steps | translate }}</button>
               <button mat-button (click)="run('revert')" [disabled]="busy() || !s.enabled || error()">{{ I18N.darktable_edit.revert | translate }}</button>
             </div>
           </section>
@@ -213,13 +214,13 @@ export class DarktableEditDialogComponent implements OnInit {
     }
   }
 
-  async download(): Promise<void> {
+  async download(part: 'image' | 'steps' = 'image'): Promise<void> {
     if (this.busy() || !this.current()) return;
     this.busy.set(true);
     try {
-      const data = await firstValueFrom(this.api.getRaw(`/api/photo/darktable/download?${new URLSearchParams({ path: this.data.path })}`));
+      const data = await firstValueFrom(this.api.getRaw(`/api/photo/darktable/download?${new URLSearchParams({ path: this.data.path, part })}`));
       if (!this.current()) return;
-      downloadBlob(data, 'edited.jxl');
+      downloadBlob(data, part === 'steps' ? `${this.data.path.split('/').pop()}.xmp` : 'edited.jxl');
     } catch {
       if (this.current()) { this.failed.set('download'); this.error.set(true); }
     } finally {

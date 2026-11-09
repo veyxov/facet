@@ -213,7 +213,7 @@ Activa FACET_DARKTABLE_EDIT=1, instala darktable y ExifTool en el equipo del ser
 
 Abre y edita la foto en darktable. Cuando darktable guarda el archivo XMP (sal del cuarto oscuro o cambia de imagen), el diálogo te avisa; nada cambia hasta que pulses Aplicar. El original se conserva. Mantén este diálogo abierto mientras editas. darktable se abre en el equipo que ejecuta Facet.
 
-Las fotos editadas llevan un pequeño icono de ajustes en la galería. El icono de comparar en la vista de la foto muestra el original junto a la edición con zoom sincronizado. «Restaurar la original» recupera la imagen; la descarga entrega la edición en JPEG XL (calidad 97).
+Las fotos editadas llevan un pequeño icono de ajustes en la galería. El icono de comparar en la vista de la foto muestra el original junto a la edición con zoom sincronizado. «Restaurar la original» recupera la imagen; la descarga entrega la edición en JPEG XL (calidad 90). El historial queda en `<archivo>.xmp` junto al original; cópialo con la foto para seguir editando en otro equipo. «Descargar pasos de edición (.xmp)» entrega la copia guardada por Facet.
 
 La edición sustituye la imagen mostrada en la misma entrada. Se conservan originales, EXIF, ubicaciones, personas, valoraciones y álbumes. Las coordenadas faciales, puntuaciones y análisis siguen describiendo el original. Las descargas originales no cambian.
 

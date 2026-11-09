@@ -4126,6 +4126,7 @@ export const I18N = {
     apply: "darktable_edit.apply",
     revert: "darktable_edit.revert",
     download: "darktable_edit.download",
+    download_steps: "darktable_edit.download_steps",
     original: "darktable_edit.original",
     edited: "darktable_edit.edited",
     badge: "darktable_edit.badge",

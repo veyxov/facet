@@ -89,6 +89,15 @@ def test_apply_keeps_original_and_entire_photo_row_then_reverts(edition_client, 
     assert apply(edition_client, photo, initial['token']).status_code == 409
     assert edition_client.get('/image', params={'path': photo}).content == original
     assert edition_client.get('/api/photo/darktable/download', params={'path': photo}).status_code == 404
+    assert edition_client.get('/api/photo/darktable/download', params={'path': photo, 'part': 'steps'}).status_code == 404
+
+
+def test_steps_download_returns_the_applied_sidecar(edition_client, photo, monkeypatch):
+    monkeypatch.setattr(edits, 'render', fake_render)
+    assert apply(edition_client, photo, state(edition_client, photo)['token']).status_code == 200
+    steps = edition_client.get('/api/photo/darktable/download', params={'path': photo, 'part': 'steps'})
+    assert steps.status_code == 200 and steps.content == b'history'
+    assert steps.headers['content-disposition'].endswith('.xmp')
 
 
 def test_image_negotiates_jpeg_xl(edition_client, photo, monkeypatch):

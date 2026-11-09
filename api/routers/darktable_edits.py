@@ -5,6 +5,8 @@ import os
 import subprocess
 import sys
 import threading
+from typing import Literal
+from urllib.parse import quote
 
 from fastapi import APIRouter, Depends, HTTPException, Response
 from pydantic import BaseModel
@@ -151,12 +153,14 @@ def revert_edit(body: EditRequest, user: CurrentUser = Depends(require_edition))
 
 
 @router.get('/api/photo/darktable/download')
-def download_edit(path: str, user: CurrentUser = Depends(require_edition)):
+def download_edit(path: str, part: Literal['image', 'steps'] = 'image', user: CurrentUser = Depends(require_edition)):
     with get_db() as conn:
         _visible(conn, user, path)
-        data = edits.read_edit(conn, path, 'jxl')
+        data = edits.read_edit(conn, path, 'history' if part == 'steps' else 'jxl')
     if not data:
         raise HTTPException(404, 'No edited rendition')
-    return Response(data, media_type='image/jxl', headers={
+    # darktable names a sidecar <image file name>.xmp, so the download drops straight next to a copied original.
+    name = quote(os.path.basename(path) + '.xmp') if part == 'steps' else 'edited.jxl'
+    return Response(data, media_type='application/xml' if part == 'steps' else 'image/jxl', headers={
         'Cache-Control': 'private, no-store',
-        'Content-Disposition': 'attachment; filename="edited.jxl"'})
+        'Content-Disposition': f"attachment; filename*=UTF-8''{name}"})

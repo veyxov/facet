@@ -4112,6 +4112,7 @@
     "apply": "应用已保存的编辑",
     "revert": "恢复原件",
     "download": "下载编辑后的 JPEG XL",
+    "download_steps": "下载编辑步骤 (.xmp)",
     "original": "原图",
     "edited": "已编辑",
     "badge": "已在 darktable 中编辑",

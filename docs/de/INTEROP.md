@@ -213,7 +213,7 @@ Aktivieren Sie FACET_DARKTABLE_EDIT=1, installieren Sie darktable und ExifTool a
 
 Öffnen und bearbeiten Sie das Foto in darktable. Sobald darktable die XMP-Datei speichert (Dunkelkammer verlassen oder Bild wechseln), meldet der Dialog das; erst mit „Anwenden“ ändert sich etwas. Das Original bleibt erhalten. Lassen Sie diesen Dialog beim Bearbeiten geöffnet. darktable öffnet sich auf dem Facet-Rechner.
 
-Bearbeitete Fotos tragen in der Galerie ein kleines Regler-Symbol. Mit dem Vergleichen-Symbol in der Fotoansicht sehen Sie Original und Bearbeitung nebeneinander, mit gemeinsamem Zoom. „Auf das Original zurücksetzen“ stellt die Anzeige wieder her; der Download liefert die Bearbeitung als JPEG XL (Qualität 97).
+Bearbeitete Fotos tragen in der Galerie ein kleines Regler-Symbol. Mit dem Vergleichen-Symbol in der Fotoansicht sehen Sie Original und Bearbeitung nebeneinander, mit gemeinsamem Zoom. „Auf das Original zurücksetzen“ stellt die Anzeige wieder her; der Download liefert die Bearbeitung als JPEG XL (Qualität 90). Der Verlauf liegt als `<datei>.xmp` neben dem Original; kopieren Sie ihn mit dem Foto, um auf einem anderen Rechner weiterzuarbeiten. „Bearbeitungsschritte herunterladen (.xmp)“ liefert die von Facet gespeicherte Kopie.
 
 Die Bearbeitung ersetzt die Anzeige im selben Galerieeintrag. Originale, EXIF, Orte, Personen, Bewertungen und Alben bleiben erhalten. Gesichtskoordinaten, Bewertungen und Suchanalysen beziehen sich weiter auf das Original. Originaldownloads bleiben unverändert.
 

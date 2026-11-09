@@ -41,7 +41,7 @@ def read_edit(conn, path, column='revision'):
     # Read-only delivery also works against databases not upgraded by this branch.
     if not conn.execute("SELECT 1 FROM sqlite_master WHERE name='photo_darktable_edits' AND type='table'").fetchone():
         return None
-    if column not in {'revision', 'jpeg', 'jxl', 'preview', 'thumbnail'}:
+    if column not in {'revision', 'jpeg', 'jxl', 'preview', 'thumbnail', 'history'}:
         raise ValueError('Unsupported rendition column')
     row = conn.execute(f'SELECT {column}, source FROM photo_darktable_edits WHERE photo_path=?', (path,)).fetchone()
     if not row:
@@ -115,7 +115,7 @@ def render(source):
             xmp.write_bytes(history)
             output = Path(tmp) / 'edited.jxl'
             _run([cli, str(snapshot), str(xmp), str(output), '--apply-custom-presets', 'false',
-                  '--core', '--library', ':memory:', '--conf', 'plugins/imageio/format/jxl/quality=97', '--conf', 'plugins/imageio/format/jxl/effort=7',
+                  '--core', '--library', ':memory:', '--conf', 'plugins/imageio/format/jxl/quality=90', '--conf', 'plugins/imageio/format/jxl/effort=7',
                   '--conf', 'plugins/imageio/format/jxl/bpp=8'])
             if not output.is_file() or output.stat().st_size > MAX_RENDER_BYTES:
                 raise HTTPException(413, 'Rendered photo exceeds the edit size limit')

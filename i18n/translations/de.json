@@ -4112,6 +4112,7 @@
     "apply": "Bearbeitung übernehmen",
     "revert": "Original wiederherstellen",
     "download": "Bearbeitetes JPEG XL herunterladen",
+    "download_steps": "Bearbeitungsschritte herunterladen (.xmp)",
     "original": "Original",
     "edited": "Bearbeitet",
     "badge": "In darktable bearbeitet",

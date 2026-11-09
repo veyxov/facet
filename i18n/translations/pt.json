@@ -4112,6 +4112,7 @@
     "apply": "Aplicar edição guardada",
     "revert": "Restaurar original",
     "download": "Descarregar JPEG XL editado",
+    "download_steps": "Transferir passos de edição (.xmp)",
     "original": "Original",
     "edited": "Editada",
     "badge": "Editada no darktable",

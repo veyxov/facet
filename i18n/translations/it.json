@@ -4112,6 +4112,7 @@
     "apply": "Applica modifica salvata",
     "revert": "Ripristina originale",
     "download": "Scarica JPEG XL modificato",
+    "download_steps": "Scarica i passaggi di modifica (.xmp)",
     "original": "Originale",
     "edited": "Modificata",
     "badge": "Modificata in darktable",

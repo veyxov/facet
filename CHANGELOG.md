@@ -172,7 +172,7 @@ All notable changes to Facet are documented in this file.
 
 - Escape on a directly opened photo returns to the saved gallery query instead of leaving the application through browser history. Gallery-opened photos retain normal history return.
 
-- Experimental desktop darktable edit return (`FACET_DARKTABLE_EDIT=1`): edit a photo in darktable and Facet applies the result automatically once darktable saves its XMP sidecar, replacing the display in the existing photo entry without rescanning or rewriting originals. Exported as JPEG XL (quality 97) with a JPEG fallback for browsers that cannot show it; edited photos get a gallery badge and an original-versus-edit compare view, and **Revert to original** undoes it. Original metadata and face identities remain intact; analysis stays tied to the original.
+- Experimental desktop darktable edit return (`FACET_DARKTABLE_EDIT=1`): edit a photo in darktable and Facet applies the result automatically once darktable saves its XMP sidecar, replacing the display in the existing photo entry without rescanning or rewriting originals. Exported as JPEG XL (quality 90, visually lossless) with a JPEG fallback for browsers that cannot show it; edited photos get a gallery badge and an original-versus-edit compare view, and **Revert to original** undoes it. Original metadata and face identities remain intact; analysis stays tied to the original.
 
 ### Security
 

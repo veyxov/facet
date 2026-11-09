@@ -17168,6 +17168,7 @@ export interface operations {
         parameters: {
             query: {
                 path: string;
+                part?: "image" | "steps";
             };
             header?: never;
             path?: never;
