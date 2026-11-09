@@ -27,11 +27,13 @@ class EditState(BaseModel):
     edited: bool
     token: str
     sidecar: str | None = None
+    derived: list[str] = []
 
 
 class EditRequest(BaseModel):
     path: str
     token: str
+    file: str | None = None
 
 
 def _visible(conn, user, path):
@@ -63,7 +65,8 @@ def _state(path, user):
                                  'uid': user.user_id, 'source': stamp, 'revision': revision, 'photo_revision': photo_revision},
                                 expires_delta=timedelta(hours=8))
     return EditState(enabled=os.environ.get('FACET_DARKTABLE_EDIT') == '1',
-                     available=bool(gui and cli and exiftool), edited=bool(revision), token=token, sidecar=sidecar)
+                     available=bool(gui and cli and exiftool), edited=bool(revision), token=token, sidecar=sidecar,
+                     derived=edits.derivatives(disk))
 
 
 def _check(body, user, conn):
@@ -118,8 +121,14 @@ def apply_edit(body: EditRequest, user: CurrentUser = Depends(require_edition)):
     _enabled()
     with get_db() as conn:
         disk = _check(body, user, conn)
+    # A file darktable created beside the original (neural restore) is rendered in place of the original.
+    render_from = disk
+    if body.file is not None:
+        if body.file not in edits.derivatives(disk):
+            raise HTTPException(404, 'No such darktable output file')
+        render_from = os.path.join(os.path.dirname(disk), body.file)
     try:
-        data, preview, thumbnail, history, width, height = edits.render(disk)
+        data, preview, thumbnail, history, width, height = edits.render(render_from)
         display = edits.display_jpeg(data)  # decode/encode before taking the write lock
         with get_db() as conn:
             conn.execute('BEGIN IMMEDIATE')

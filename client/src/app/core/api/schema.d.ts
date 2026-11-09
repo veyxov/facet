@@ -7438,6 +7438,8 @@ export interface components {
         };
         /** EditRequest */
         EditRequest: {
+            /** File */
+            file?: string | null;
             /** Path */
             path: string;
             /** Token */
@@ -7447,6 +7449,11 @@ export interface components {
         EditState: {
             /** Available */
             available: boolean;
+            /**
+             * Derived
+             * @default []
+             */
+            derived?: string[];
             /** Edited */
             edited: boolean;
             /** Enabled */

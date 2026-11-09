@@ -4145,6 +4145,8 @@ export const I18N = {
     failed_revert: "darktable_edit.failed_revert",
     failed_download: "darktable_edit.failed_download",
     reload: "darktable_edit.reload",
+    derived: "darktable_edit.derived",
+    use_derived: "darktable_edit.use_derived",
   },
 } as const;
 

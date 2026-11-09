@@ -4130,6 +4130,8 @@
     "failed_apply": "Die Bearbeitung konnte nicht übernommen werden; das bisherige Bild bleibt unverändert. In darktable erneut speichern oder neu laden und wiederholen.",
     "failed_revert": "Das Zurücksetzen auf das Original ist fehlgeschlagen. Status neu laden und erneut versuchen.",
     "failed_download": "Das bearbeitete Bild konnte nicht heruntergeladen werden. Erneut versuchen.",
-    "reload": "Status neu laden"
+    "reload": "Status neu laden",
+    "derived": "darktable hat neben dem Original eine neue Datei erstellt (Entrauschen oder Hochskalieren). Wähle eine als Bearbeitung; das Original bleibt erhalten.",
+    "use_derived": "{name} als Bearbeitung verwenden"
   }
 }

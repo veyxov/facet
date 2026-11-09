@@ -7,7 +7,7 @@ import { DarktableEditDialogComponent } from './darktable-edit-dialog.component'
 import { AuthService } from '../../core/services/auth.service';
 import { I18nService } from '../../core/services/i18n.service';
 
-const ready = { enabled: true, available: true, edited: false, token: 'session-a', sidecar: null };
+const ready = { enabled: true, available: true, edited: false, token: 'session-a', sidecar: null, derived: [] as string[] };
 
 describe('darktable edit return controls', () => {
   let http: HttpTestingController;
@@ -150,5 +150,21 @@ describe('darktable edit return controls', () => {
     await pending;
     expect(close).not.toHaveBeenCalled();
     expect(fixture.componentInstance.state()?.edited).toBe(true);
+  });
+
+  it('offers a file darktable created beside the original and applies exactly that file on request', async () => {
+    const fixture = TestBed.createComponent(DarktableEditDialogComponent);
+    fixture.detectChanges();
+    http.expectOne('/api/photo/darktable?path=/photos/a.jpg').flush({ ...ready, derived: ['a_01.tif'] });
+    await fixture.whenStable();
+    fixture.detectChanges();
+    const button = [...fixture.nativeElement.querySelectorAll('button')]
+      .find((b: HTMLButtonElement) => b.textContent?.includes('darktable_edit.use_derived')) as HTMLButtonElement;
+    button.click();
+    const apply = http.expectOne('/api/photo/darktable/apply');
+    expect(apply.request.body).toEqual({ path: '/photos/a.jpg', token: 'session-a', file: 'a_01.tif' });
+    apply.flush({ ...ready, edited: true });
+    await fixture.whenStable();
+    expect(close).toHaveBeenCalledWith('apply');
   });
 });

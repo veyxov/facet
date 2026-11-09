@@ -4130,6 +4130,8 @@
     "failed_apply": "Could not apply the edit; the previous image is unchanged. Save it again in darktable, or reload and retry.",
     "failed_revert": "Could not revert to the original. Reload the status and try again.",
     "failed_download": "Could not download the edited image. Try again.",
-    "reload": "Reload status"
+    "reload": "Reload status",
+    "derived": "darktable created a new file next to the original (denoise or upscale). Pick one to use as the edit; the original is kept.",
+    "use_derived": "Use {name} as the edit"
   }
 }

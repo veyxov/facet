@@ -17,6 +17,7 @@ interface EditState {
   edited: boolean;
   token: string;
   sidecar: string | null;
+  derived: string[];
 }
 
 @Component({
@@ -54,6 +55,18 @@ interface EditState {
         </div>
         @if (saved() && !busy()) {
           <p role="status" class="m-0 text-sm">{{ I18N.darktable_edit.saved | translate }}</p>
+        }
+        @if (s.derived.length) {
+          <section class="flex flex-col gap-2" role="status">
+            <p class="m-0 text-sm">{{ I18N.darktable_edit.derived | translate }}</p>
+            <div class="flex flex-wrap gap-2">
+              @for (name of s.derived; track name) {
+                <button mat-stroked-button (click)="run('apply', name)" [disabled]="busy() || !s.enabled || !s.available || error()">
+                  {{ I18N.darktable_edit.use_derived | translate:{ name: name } }}
+                </button>
+              }
+            </div>
+          </section>
         }
         @if (watching() && !busy()) {
           <p role="status" class="m-0 flex items-center gap-2 text-sm opacity-80">
@@ -153,7 +166,10 @@ export class DarktableEditDialogComponent implements OnInit {
     if (this.busy() || !this.current()) return;
     try {
       const next = await firstValueFrom(this.api.get<EditState>('/photo/darktable', { path: this.data.path }));
-      if (this.busy() || !this.current() || next.sidecar === this.baseline) return;
+      if (this.busy() || !this.current()) return;
+      // A denoise/upscale output appears as a new file; the original's sidecar does not change.
+      if (next.derived.join('\n') !== (this.state()?.derived ?? []).join('\n')) this.state.set(next);
+      if (next.sidecar === this.baseline) return;
       // darktable creates the sidecar on import, before any edit exists; that is not an edit.
       if (this.baseline === null) { this.baseline = next.sidecar; return; }
       if (next.sidecar !== this.seen) { this.seen = next.sidecar; return; }
@@ -185,7 +201,7 @@ export class DarktableEditDialogComponent implements OnInit {
     }
   }
 
-  async run(action: 'open' | 'apply' | 'revert'): Promise<void> {
+  async run(action: 'open' | 'apply' | 'revert', file?: string): Promise<void> {
     const state = this.state();
     if (!state || this.busy() || !this.current()) return;
     this.busy.set(true);
@@ -193,7 +209,7 @@ export class DarktableEditDialogComponent implements OnInit {
     this.error.set(false);
     try {
       const next = await firstValueFrom(this.api.post<EditState>(`/photo/darktable/${action}`, {
-        path: this.data.path, token: state.token,
+        path: this.data.path, token: state.token, ...(file ? { file } : {}),
       }));
       if (!this.current()) return;
       this.state.set(next);

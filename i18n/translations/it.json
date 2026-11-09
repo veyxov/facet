@@ -4130,6 +4130,8 @@
     "failed_apply": "Impossibile applicare la modifica; l’immagine precedente è invariata. Salvala di nuovo in darktable, oppure ricarica e riprova.",
     "failed_revert": "Impossibile ripristinare l’originale. Ricarica lo stato e riprova.",
     "failed_download": "Impossibile scaricare l’immagine modificata. Riprova.",
-    "reload": "Ricarica stato"
+    "reload": "Ricarica stato",
+    "derived": "darktable ha creato un nuovo file accanto all'originale (riduzione del rumore o ingrandimento). Scegline uno come modifica; l'originale viene conservato.",
+    "use_derived": "Usa {name} come modifica"
   }
 }

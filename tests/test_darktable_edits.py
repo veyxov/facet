@@ -100,6 +100,27 @@ def test_steps_download_returns_the_applied_sidecar(edition_client, photo, monke
     assert steps.headers['content-disposition'].endswith('.xmp')
 
 
+def test_neural_restore_output_is_offered_and_rendered_instead_of_the_original(edition_client, photo, monkeypatch):
+    original = Path(photo)
+    upscaled = original.with_name(original.stem + '_01.tif')
+    upscaled.write_bytes(b'tiff')
+    original.with_name(original.stem + '.cr2').write_bytes(b'companion raw')
+    other = original.with_name('unrelated.tif')
+    other.write_bytes(b'tiff')
+    initial = state(edition_client, photo)
+    assert initial['derived'] == [upscaled.name]
+    rendered = []
+    monkeypatch.setattr(edits, 'render', lambda source: rendered.append(source) or fake_render(source))
+    def post(file):
+        return edition_client.post('/api/photo/darktable/apply', json={'path': photo, 'token': initial['token'], 'file': file})
+
+    assert post('unrelated.tif').status_code == 404
+    assert post('../' + upscaled.name).status_code == 404
+    assert post(upscaled.name).status_code == 200
+    assert rendered == [str(upscaled)]
+    assert upscaled.read_bytes() == b'tiff' and original.read_bytes() == jpeg()
+
+
 def test_image_negotiates_jpeg_xl(edition_client, photo, monkeypatch):
     monkeypatch.setattr(edits, 'render', fake_render)
     assert apply(edition_client, photo, state(edition_client, photo)['token']).status_code == 200

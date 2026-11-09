@@ -4130,6 +4130,8 @@
     "failed_apply": "无法应用编辑；之前的图像保持不变。请在 darktable 中重新保存，或重新加载后重试。",
     "failed_revert": "无法恢复为原图。请重新加载状态后重试。",
     "failed_download": "无法下载编辑后的图像。请重试。",
-    "reload": "重新加载状态"
+    "reload": "重新加载状态",
+    "derived": "darktable 在原图旁生成了新文件（降噪或放大）。选择其一作为编辑结果；原图会保留。",
+    "use_derived": "将 {name} 用作编辑结果"
   }
 }

@@ -4130,6 +4130,8 @@
     "failed_apply": "Impossible d’appliquer la modification ; l’image précédente est inchangée. Enregistrez-la à nouveau dans darktable, ou rechargez et réessayez.",
     "failed_revert": "Impossible de revenir à l’original. Rechargez l’état et réessayez.",
     "failed_download": "Impossible de télécharger l’image modifiée. Réessayez.",
-    "reload": "Recharger l’état"
+    "reload": "Recharger l’état",
+    "derived": "darktable a créé un nouveau fichier à côté de l'original (débruitage ou agrandissement). Choisissez-en un comme retouche ; l'original est conservé.",
+    "use_derived": "Utiliser {name} comme retouche"
   }
 }

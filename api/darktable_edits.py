@@ -37,6 +37,20 @@ def sidecar_digest(disk):
     return hashlib.sha256(data).hexdigest() if len(data) <= 8 * 1024 * 1024 else None
 
 
+DERIVATIVE_SUFFIXES = {'.tif', '.tiff', '.dng'}
+
+
+def derivatives(disk):
+    """Files darktable's neural restore (denoise, upscale) wrote next to the original: <stem>_NN.tif|dng."""
+    disk = Path(disk)
+    try:
+        return sorted(p.name for p in disk.parent.iterdir()
+                      if p != disk and p.suffix.lower() in DERIVATIVE_SUFFIXES
+                      and p.stem.startswith(disk.stem + '_') and p.is_file() and not p.is_symlink())
+    except OSError:
+        return []
+
+
 def read_edit(conn, path, column='revision'):
     # Read-only delivery also works against databases not upgraded by this branch.
     if not conn.execute("SELECT 1 FROM sqlite_master WHERE name='photo_darktable_edits' AND type='table'").fetchone():

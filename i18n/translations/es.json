@@ -4130,6 +4130,8 @@
     "failed_apply": "No se pudo aplicar la edición; la imagen anterior no ha cambiado. Guárdala de nuevo en darktable o recarga y reintenta.",
     "failed_revert": "No se pudo restaurar la original. Recarga el estado e inténtalo de nuevo.",
     "failed_download": "No se pudo descargar la imagen editada. Inténtalo de nuevo.",
-    "reload": "Recargar estado"
+    "reload": "Recargar estado",
+    "derived": "darktable creó un archivo nuevo junto al original (reducción de ruido o ampliación). Elige uno como edición; el original se conserva.",
+    "use_derived": "Usar {name} como edición"
   }
 }

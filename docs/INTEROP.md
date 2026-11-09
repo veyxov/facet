@@ -228,7 +228,7 @@ Edited photos show a small `photo_filter` badge on gallery cards, and the photo 
 **compare** button that opens the original beside the edit in synced pan/zoom panes (the
 original is requested with `original=1` on `/image` and `/thumbnail`). **Download edited JPEG XL** returns the rendition (JPEG XL, quality 90, visually lossless at about half the size of quality 97);
 the ordinary original-download action still returns the original. **Revert to original**
-restores the original display. Reopening darktable continues from its saved sidecar, which lives next to the original as `<file>.xmp` and is never deleted; copy it with the photo to another computer to keep editing. **Download edit steps (.xmp)** returns the copy Facet stored when you applied, as a backup.
+restores the original display. Reopening darktable continues from its saved sidecar, which lives next to the original as `<file>.xmp` and is never deleted; copy it with the photo to another computer to keep editing. **Download edit steps (.xmp)** returns the copy Facet stored when you applied, as a backup. darktable's neural restore (denoise, upscale) writes a **new file** (`<name>_01.tif`, or a DNG for raw denoise) next to the original instead of changing it. The dialog lists such files; **Use <file> as the edit** renders that file as the edit and still keeps the original.
 
 Original image bytes, EXIF, GPS, captions, tags, face identities, manual regions,
 ratings, albums and stack membership are retained. The file on disk is not replaced.
