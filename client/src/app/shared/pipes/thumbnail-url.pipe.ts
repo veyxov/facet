@@ -64,22 +64,16 @@ export class ThumbnailUrlPipe implements PipeTransform {
   }
 }
 
+/** Small srcset candidate for cover cards; the large one is the stored thumbnail. */
+export const COVER_THUMBNAIL_EDGE = 320;
+
 /** Both candidates come from the stored thumbnail, so neither renders from the
  *  original. `w` is the long edge: a portrait cover cropped to a landscape card
  *  is a little softer on a dense screen than a landscape one. */
 export function thumbnailSrcset(path: string, revision?: string | null): string {
-  return [320, STORED_THUMBNAIL_EDGE]
+  return [COVER_THUMBNAIL_EDGE, STORED_THUMBNAIL_EDGE]
     .map((size) => `${thumbnailUrl(path, size, revision)} ${size}w`)
     .join(', ');
-}
-
-@Pipe({ name: 'thumbnailSrcset', standalone: true, pure: false })
-export class ThumbnailSrcsetPipe implements PipeTransform {
-  private readonly memo = new UrlMemo(thumbnailSrcset);
-
-  transform(path: string, revision?: string | null): string {
-    return this.memo.get(path, revision);
-  }
 }
 
 export function imageUrl(path: string, fallbackThumbnail = false, revision?: string | null, scope?: SharedAlbumMediaScope | null): string {
